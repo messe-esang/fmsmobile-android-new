@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="0dp"
+    android:background="@color/color_F8F8FA"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="0dp">
+
+    <RadioButton
+        style="@style/TextBody"
+        android:layout_width="47dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/selector_border_org_selectable"
+        android:button="@android:color/transparent"
+        android:enabled="false"
+        android:gravity="center"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="업체명"
+        android:textAllCaps="false"
+        android:textColor="@drawable/selector_text_namecard_checkable"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/layoutSearch"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_margin="3dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:backgroundTint="@null">
+
+        <EditText
+            android:id="@+id/editSearch_company"
+            style="@style/TextSubTitle"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:background="@drawable/namecard_edit_rounded_bg"
+            android:hint="업체명"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/color_CFD0DA" />
+    </RelativeLayout>
+</LinearLayout>

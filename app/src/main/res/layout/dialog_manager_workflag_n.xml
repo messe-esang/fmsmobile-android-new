@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/namecard_cardview_rounded_bg"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:id="@+id/staff_error_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:background="@drawable/namecard_gray_rounded_bg"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="4dp"
+            android:text="퇴직 상태의 담당자는 영업 등록이 불가합니다."
+            android:textColor="@color/color_DC6A7A"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="4dp"
+            android:text="웹에서 재직여부를 변경해 주세요."
+            android:textColor="@color/color_DC6A7A"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <!-- 확인 버튼 -->
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/namecard_btn_rounded"
+        android:text="확인"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+</LinearLayout>

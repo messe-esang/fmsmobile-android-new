@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "155683761618",
+    "firebase_url": "https://fmsmobile-1d720.firebaseio.com",
+    "project_id": "fmsmobile-1d720",
+    "storage_bucket": "fmsmobile-1d720.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155683761618:android:be017224e2359e51",
+        "android_client_info": {
+          "package_name": "net.e_sang.fmsmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155683761618-rni2o32qcov9lipna7b6liiujb4r4o8b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.e_sang.fmsmobile",
+            "certificate_hash": "6580ce0027292790956f548c3694ec3e2b08058e"
+          }
+        },
+        {
+          "client_id": "155683761618-t850r2qaa9hn7v8qashreso951hb6t8r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.e_sang.fmsmobile",
+            "certificate_hash": "34c26b122696dfddc09e33c966cd57338ba7f206"
+          }
+        },
+        {
+          "client_id": "155683761618-m0gh8prigclul243sh4jm54e3nh59nrv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQDhvkOO-0ZVKXZe9S6cq7JImlUij-nqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155683761618-m0gh8prigclul243sh4jm54e3nh59nrv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "155683761618-cdf0882gh0shbsmhd62e872hqtgnbaos.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "net.e-sang.FMSMobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

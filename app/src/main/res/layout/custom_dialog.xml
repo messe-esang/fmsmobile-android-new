@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/edittext_rounded_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="0dp"
+            android:text="▣ 영업 내용 수정"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="5dp"
+            android:text="※ 당일 본인이 작성한 내용만 수정 가능합니다."
+            android:textColor="@color/color_text_error"
+            android:textSize="14dp" />
+
+        <EditText
+            android:id="@+id/put_txtContent"
+            style="@style/TextBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/edittext_rounded_bg"
+            android:gravity="top"
+            android:maxLines="20"
+            android:minLines="5"
+            android:paddingLeft="@dimen/activity_horizontal_margin_little"
+            android:paddingTop="5dp"
+            android:paddingRight="@dimen/activity_horizontal_margin_little"
+            android:paddingBottom="5dp"
+            android:textColor="@color/color_text_medium" />
+
+        <TextView
+            android:id="@+id/txtErrorContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="0dp"
+            android:text="※ 내용을 입력하여 주세요."
+            android:textColor="@color/color_text_error"
+            android:textSize="12dp"
+            android:textStyle="normal"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCancle"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/staff_add_btn_bg"
+                android:padding="0dp"
+                android:scaleType="center"
+                android:text="취소"
+                android:textColor="@android:color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:backgroundTint="@null" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/staff_add_btn_bg"
+                android:padding="0dp"
+                android:scaleType="center"
+                android:text="저장"
+                android:textColor="@android:color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:backgroundTint="@null" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

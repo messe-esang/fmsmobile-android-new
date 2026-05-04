@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="net.e_sang.fmsmobile.ui.MainActivity">
+
+    <item
+        android:id="@+id/action_plan"
+        android:icon="@drawable/btn_calendar_bg_ripple"
+        android:title="Action Plan"
+        android:visible="false"
+        app:showAsAction="always"></item>
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/btn_logout_bg_ripple"
+        android:title="Logout"
+        android:visible="false"
+        app:showAsAction="always"></item>
+
+</menu>

@@ -1,0 +1,13 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:drawableRight="@drawable/selector_baseline_done_24"
+    android:gravity="center"
+    android:text="@string/action_reg_sales"
+    android:drawablePadding="2dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin_little"
+    android:paddingRight="@dimen/activity_horizontal_margin_little"
+    android:textColor="@drawable/selector_text_white_for_menu"
+    android:enabled="false"
+    android:background="?attr/selectableItemBackground" />

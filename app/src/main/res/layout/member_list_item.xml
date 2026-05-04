@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_marginTop="20dp"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+                  android:orientation="horizontal"
+                  android:gravity="center"
+                  android:layout_height="wrap_content">
+        <TextView
+                android:id="@+id/member_title"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/color_class_event"
+                android:textSize="23dp"
+                android:textStyle="bold"/>
+
+        <ImageButton
+                android:id="@+id/assign_img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@drawable/ico_assign_confirm"
+                android:padding="4dp"
+                android:background="@drawable/assign_img_btn_bg"/>
+
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+        <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"/>
+
+        <TextView
+                android:id="@+id/member_count1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="처리업체"
+                android:textColor="@color/color_9A9A9A"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+        <TextView
+                android:id="@+id/member_count2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="배정업체"
+                android:textColor="@color/color_9A9A9A"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+        <TextView
+                android:id="@+id/member_count3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="처리율"
+                android:textColor="@color/color_9A9A9A"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+    </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_gray"/>
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<androidx.recyclerview.widget.RecyclerView-->
+    <!--android:id="@+id/allocation_recycler_item"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/txtEmpty"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:text="배정된 행사가 없습니다."-->
+    <!--android:visibility="gone" />-->
+    <!--</LinearLayout>-->
+</LinearLayout>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.AnnualVisitorStatisticsActivity">
+
+    <include layout="@layout/include_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/annual_visitor_statistics_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_search_bg"
+                    android:descendantFocusability="blocksDescendants"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:gravity="center"
+                        android:paddingLeft="5dp"
+                        android:text="전시회 구분"
+                        android:textSize="16dp" />
+
+                    <com.weiwangcn.betterspinner.library.BetterSpinner
+                        android:id="@+id/spinner_annual_visitor_statistics"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:popupBackground="@android:color/white"
+                        android:textSize="16dp"
+                        app:met_floatingLabel="highlight" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/annual_visitor_statistics_layout"
+            android:background="@color/color_gray" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/line"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/annual_visitor_statistics_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/txtEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="등록된 행사가 없습니다."
+                android:visibility="visible" />
+
+            <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:indeterminate="true"
+                android:visibility="invisible"
+                app:spb_color="@color/color_FFF4D5"
+                app:spb_mirror_mode="true"
+                app:spb_progressiveStart_activated="false"
+                app:spb_progressiveStart_speed="2.0"
+                app:spb_progressiveStop_speed="3.4"
+                app:spb_reversed="true"
+                app:spb_sections_count="4"
+                app:spb_speed="2.0"
+                app:spb_stroke_separator_length="4dp"
+                app:spb_stroke_width="4dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/progressBar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#40000000"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <fr.castorflex.android.circularprogressbar.CircularProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:indeterminate="true"
+                app:cpb_color="@color/color_FFF4D5" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,160 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.firebase.crashlytics)
+}
+
+android {
+    namespace 'net.e_sang.fmsmobile'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "net.e_sang.fmsmobile"
+        minSdk 24
+        targetSdk 36
+        versionCode 1
+        versionName "1.64"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions "fmsmobile"
+
+    productFlavors {
+        esgroup {
+            dimension "fmsmobile"
+            android.buildFeatures.buildConfig = true
+            buildConfigField "String", "API_URL", "\"https://mfms.esfair.kr/API\""
+            buildConfigField "String", "APK_FILE_NAME", "\"FMSMobile.apk\""
+            buildConfigField "String", "URL_DOWNLOAD_APK", "\"https://dev.e-sang.net/esgroup/\""
+            buildConfigField "String", "APP_FLAVOR", "\"esgroup\""
+        }
+
+        exco {
+            dimension "fmsmobile"
+            versionCode 1
+            versionName "1.02"
+            applicationIdSuffix ".exco"
+            android.buildFeatures.buildConfig = true
+            buildConfigField "String", "API_URL", "\"https://fmsmob.exco.co.kr/API\""
+            buildConfigField "String", "APK_FILE_NAME", "\"EXCOFMS.apk\""
+            buildConfigField "String", "URL_DOWNLOAD_APK", "\"https://fms.exco.co.kr/\""
+            buildConfigField "String", "APP_FLAVOR", "\"exco\""
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'
+            ), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+
+    packaging {
+        resources {
+            excludes.addAll([
+                    "/META-INF/AL2.0",
+                    "/META-INF/LGPL2.1"
+            ])
+        }
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation libs.play.services.location
+    implementation libs.appcompat.v170
+    implementation libs.legacy.support.v4
+    implementation libs.constraintlayout
+    implementation libs.cardview
+    implementation libs.recyclerview
+    implementation libs.vectordrawable.animated
+    implementation libs.exifinterface
+    implementation libs.media
+
+    // FCM
+    implementation platform(libs.firebase.bom)
+
+    implementation libs.firebase.messaging
+    implementation libs.firebase.analytics
+    implementation libs.firebase.crashlytics.ndk
+
+    // OkHttp (http://square.github.io/okhttp/)
+    implementation libs.okhttp
+
+    implementation libs.switch.button
+
+    // Floating Search View (https://github.com/arimorty/floatingsearchview)
+    implementation libs.floatingsearchview
+
+    implementation libs.library
+
+    // BetterSpinner (https://github.com/Lesilva/BetterSpinner)
+    implementation(libs.library.material)
+
+    implementation libs.sectionedrecyclerviewadapter
+
+    // Gsonbadged
+    implementation libs.gson
+
+    //implementation 'com.whiteelephant:monthandyearpicker:1.3.0'
+    implementation libs.monthandyearpicker
+
+    implementation libs.betterspinner.library
+
+    //SmoothProgressBar
+    implementation libs.smoothprogressbar.library
+    implementation libs.library.circular
+    // SingleDateAndTimePicker (https://github.com/florent37/SingleDateAndTimePicker)
+
+    implementation libs.android.advancedwebview
+
+    // Chart
+    implementation libs.mpandroidchart
+
+    // Horizontal Calendar
+    implementation files('libs/horizontalcalendar-1.3.4.aar')
+    implementation files('libs/singledateandtimepicker-2.2.8.aar')
+
+    implementation libs.tedpermission.normal
+
+    implementation(libs.zxing.android.embedded) { transitive = false }
+    implementation libs.core
+
+    // CameraX
+    implementation libs.camera.camera2
+    implementation libs.camera.lifecycle
+    implementation libs.camera.view
+
+    // 이미지 Crop (가장 안정적)
+    implementation libs.android.image.cropper
+    implementation libs.photoview
+
+    implementation libs.glide
+    annotationProcessor libs.compiler
+}

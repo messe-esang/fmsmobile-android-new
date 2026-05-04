@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.ActionPlanActivity">
+
+    <include layout="@layout/include_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:background="@null"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="날짜 선택"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/editDate"
+                style="@style/TextSubTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/bg_white_border_gray"
+                android:clickable="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:gravity="center_vertical|end"
+                android:hint="날짜 선택"
+                android:inputType="none"
+                android:textColorHint="@color/color_text_low"
+                android:textIsSelectable="true" />
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextSubTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="일정 등록 내용"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_white_border_gray"
+            android:orientation="horizontal"
+            android:padding="1dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@android:color/white"
+                android:padding="1dp"
+                app:boxBackgroundMode="none"
+                app:counterEnabled="false"
+                app:counterMaxLength="10000">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editContent_ActionPlan"
+                    style="@style/TextBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:background="@android:color/white"
+                    android:gravity="top|left"
+                    android:inputType="textMultiLine"
+                    android:maxLines="20"
+                    android:minLines="15" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--            <Button-->
+            <!--                    android:id="@+id/btnRegister_ActionPlan"-->
+            <!--                    style="@style/TextBody"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:layout_gravity="fill_vertical"-->
+            <!--                    android:background="@drawable/selector_blue"-->
+            <!--                    android:enabled="false"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:minWidth="50dp"-->
+            <!--                    android:text="등록"-->
+            <!--                    android:textColor="@drawable/selector_text_white" />-->
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtErrorContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="* 일정 등록 내용을 입력해주세요."
+            android:textColor="@color/color_text_error"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/delete_btn"
+            style="@style/Plan_Delete_Button"
+            android:layout_width="0dp"
+            app:backgroundTint="@null"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="0dp"
+            android:layout_weight="1"
+            android:text="삭제" />
+
+        <Space
+            android:id="@+id/space_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1" />
+
+        <Button
+            android:id="@+id/btnRegister_ActionPlan"
+            style="@style/Plan_add_Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@null"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="0dp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:text="등록" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_bottom_sheet"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <View
+        android:id="@+id/view_layout"
+        android:layout_width="40dp"
+        android:layout_height="8dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:background="#CCCCCC" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_layout"
+        android:layout_marginBottom="0dp"
+        android:text="담당자 선택 또는 신규 등록"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/title_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginBottom="8dp"
+        android:text="* 담당자 목록을 선택하거나 신규 등록 버튼을 누르면 바로 등록 됩니다."
+        android:textColor="@color/color_DC6A7A"
+        android:textSize="10dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/name_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_2"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/namecard_gray_rounded_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="검색 기준 : "
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="홍길동"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/btn_btnAddContact_layout"
+        android:layout_below="@+id/name_title"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/btn_btnAddContact_layout"
+        android:layout_below="@+id/name_title"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/ic_search_category_default" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="동일 이름의 담당자가 없습니다.\n신규 담당자로 등록하세요."
+            android:textColor="@color/color_text_error" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_btnAddContact_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/namecard_btn_line_rounded"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:text="담당자 신규 등록"
+            android:textColor="@color/color_FF6E2B"
+            android:textStyle="bold" />
+    </LinearLayout>
+</RelativeLayout>

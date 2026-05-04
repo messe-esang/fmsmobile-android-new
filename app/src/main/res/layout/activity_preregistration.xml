@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.PreregistrationActivity">
+
+    <include layout="@layout/include_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/radio_group_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioGroup
+                        android:id="@+id/preregistration_rdogroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/old_fair_btn"
+                            style="@style/TextBody"
+                            android:layout_width="0dp"
+                            android:layout_height="43dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/preregistration_btn_bg"
+                            android:button="@android:color/transparent"
+                            android:gravity="center"
+                            android:text="지난 행사"
+                            android:textColor="@drawable/preregistration_selector_text"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <Space
+                            android:layout_width="10dp"
+                            android:layout_height="wrap_content" />
+
+                        <RadioButton
+                            android:id="@+id/new_fair_btn"
+                            style="@style/TextBody"
+                            android:layout_width="0dp"
+                            android:layout_height="43dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/preregistration_btn_bg"
+                            android:button="@android:color/transparent"
+                            android:checked="true"
+                            android:gravity="center"
+                            android:text="진행중 행사"
+                            android:textColor="@drawable/preregistration_selector_text"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/radio_group_layout"
+            android:background="@color/color_gray" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/line"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/preregistration_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/txtEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="등록된 사전등록 행사가 없습니다."
+                android:textColor="@color/color_9A9A9A"
+                android:visibility="gone" />
+
+            <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:indeterminate="true"
+                android:visibility="invisible"
+                app:spb_color="@color/color_C9B5AF"
+                app:spb_mirror_mode="true"
+                app:spb_progressiveStart_activated="false"
+                app:spb_progressiveStart_speed="2.0"
+                app:spb_progressiveStop_speed="3.4"
+                app:spb_reversed="true"
+                app:spb_sections_count="4"
+                app:spb_speed="2.0"
+                app:spb_stroke_separator_length="4dp"
+                app:spb_stroke_width="4dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/progressBar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#40000000"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <fr.castorflex.android.circularprogressbar.CircularProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:indeterminate="true"
+                app:cpb_color="@color/color_C9B5AF" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

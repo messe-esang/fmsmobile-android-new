@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="net.e_sang.fmsmobile.ui.MainActivity"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_name_card"
+            android:checkable="false"
+            android:icon="@drawable/nav_name_card"
+            android:title="@string/str_menu_title_6"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_briefcase"
+            android:checkable="false"
+            android:icon="@drawable/ico_briefcase"
+            android:title="@string/str_menu_title_1" />
+        <item
+            android:id="@+id/nav_report"
+            android:checkable="false"
+            android:icon="@drawable/ico_report"
+            android:title="@string/str_menu_title_2" />
+        <item
+            android:id="@+id/nav_calendar"
+            android:checkable="false"
+            android:icon="@drawable/btn_calendar_bg_ripple"
+            android:title="@string/str_menu_title_3" />
+        <item
+            android:id="@+id/nav_qr_code"
+            android:checkable="false"
+            android:icon="@drawable/nav_qr_code"
+            android:title="@string/str_menu_title_4"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_logout"
+            android:checkable="false"
+            android:icon="@drawable/ico_logout"
+            android:title="@string/str_menu_title_5" />
+    </group>
+</menu>

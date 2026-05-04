@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".namecard.NameCardListActivity">
+
+    <include layout="@layout/include_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_layout"
+        android:layout_below="@id/toolbar"
+        android:background="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+            <!-- 일치 검색 헤더 -->
+            <LinearLayout
+                android:id="@+id/layoutMatchHeader"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/namecard_edit_rounded_bg"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="12dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/ic_name_card_filter" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="0dp"
+                    android:text="필터"
+                    android:textColor="#666666"
+                    android:textSize="15dp" />
+
+                <RadioGroup
+                    android:id="@+id/rdogroupSortType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible">
+
+                    <RadioButton
+                        android:id="@+id/rdoSort_company"
+                        style="@style/TextBody"
+                        android:layout_width="47dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/selector_border_org_selectable"
+                        android:button="@android:color/transparent"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="업체명"
+                        android:textAllCaps="false"
+                        android:textColor="@drawable/selector_text_namecard_checkable"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content" />
+
+                    <RadioButton
+                        android:id="@+id/rdoSort_name"
+                        style="@style/TextBody"
+                        android:layout_width="47dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/selector_border_org_selectable"
+                        android:button="@android:color/transparent"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="성 명"
+                        android:textAllCaps="false"
+                        android:textColor="@drawable/selector_text_namecard_checkable"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content" />
+
+                    <RadioButton
+                        android:id="@+id/rdoSort_email"
+                        style="@style/TextBody"
+                        android:layout_width="47dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/selector_border_org_selectable"
+                        android:button="@android:color/transparent"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="이메일"
+                        android:textAllCaps="false"
+                        android:textColor="@drawable/selector_text_namecard_checkable"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content" />
+
+                    <RadioButton
+                        android:id="@+id/rdoSort_mobile"
+                        style="@style/TextBody"
+                        android:layout_width="47dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/selector_border_org_selectable"
+                        android:button="@android:color/transparent"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="연락처"
+                        android:textAllCaps="false"
+                        android:textColor="@drawable/selector_text_namecard_checkable"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+                </RadioGroup>
+
+                <ImageView
+                    android:id="@+id/imgArrow"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_arrow_down" />
+            </LinearLayout>
+
+            <!-- 펼쳐지는 영역 -->
+            <LinearLayout
+                android:id="@+id/layoutMatchBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layoutMatchHeader"
+
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="11dp"
+                android:background="@drawable/namecard_edit_rounded_bg_gray"
+                android:orientation="vertical"
+                android:padding="2dp"
+                android:visibility="gone">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true"
+                    android:overScrollMode="never">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <RelativeLayout
+                            android:id="@+id/layoutSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="43dp"
+                            android:layout_margin="3dp"
+                            android:layout_toStartOf="@+id/btnSearchAll"
+                            android:background="@drawable/namecard_edit_rounded_bg"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:padding="@dimen/activity_horizontal_margin_little">
+
+                            <EditText
+                                android:id="@+id/editSearch"
+                                style="@style/TextSubTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:drawablePadding="10dp"
+                                android:hint="통합 검색"
+                                android:imeOptions="actionSearch"
+                                android:inputType="text"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/color_CFD0DA" />
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <include
+                                layout="@layout/item_match_input_company"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <include
+                                layout="@layout/item_match_input_name"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <include
+                                layout="@layout/item_match_input_email"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <include
+                                layout="@layout/item_match_input_mobile"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/new_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/color_B7B9CB" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/img_calender"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:background="@android:drawable/ic_menu_my_calendar" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toEndOf="@+id/img_calender"
+                                    android:text="명함 등록 기간"
+                                    android:textColor="#666666"
+                                    android:textSize="15dp" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginEnd="3dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/start_date"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="29dp"
+                                        android:background="@drawable/namecard_edit_rounded_bg"
+                                        android:clickable="true"
+                                        android:gravity="center"
+                                        android:hint="YYYY-MM-DD"
+                                        android:padding="6dp"
+                                        android:textSize="11dp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:hint=" ~ " />
+
+                                    <TextView
+                                        android:id="@+id/end_date"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="29dp"
+                                        android:background="@drawable/namecard_edit_rounded_bg"
+                                        android:clickable="true"
+                                        android:gravity="center"
+                                        android:hint="YYYY-MM-DD"
+                                        android:padding="6dp"
+                                        android:textSize="11dp" />
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                            <CheckBox
+                                android:id="@+id/my_search"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:text="내가 등록한 명함만 보기"
+                                android:textColor="#666666"
+                                android:textSize="13dp" />
+
+                            <Button
+                                android:id="@+id/btnSearchAll"
+                                android:layout_width="match_parent"
+                                android:layout_height="42dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="0dp"
+                                android:background="@drawable/namecard_btn_rounded"
+                                android:text="조회"
+                                android:textColor="#FFFFFF"
+                                android:textSize="16dp"
+                                android:textStyle="bold"
+                                app:backgroundTint="@null"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+                        <!-- 검색 버튼 -->
+                        <Button
+                            android:id="@+id/btnSearch"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="end"
+                            android:layout_margin="12dp"
+                            android:layout_marginTop="0dp"
+                            android:background="@drawable/namecard_btn_rounded"
+                            android:text="검색"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp"
+                            app:backgroundTint="@null"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layoutMatchBody"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/color_696B79" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white"
+                        android:padding="10dp" />
+
+                    <TextView
+                        android:id="@+id/txtEmpty"
+                        style="@style/TextSubTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="검색된 명함이 없습니다."
+                        android:textColor="@color/color_696B79"
+                        android:visibility="visible" />
+
+                    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:indeterminate="true"
+                        android:visibility="invisible"
+                        app:spb_color="@color/color_class_event"
+                        app:spb_mirror_mode="true"
+                        app:spb_progressiveStart_activated="false"
+                        app:spb_progressiveStart_speed="2.0"
+                        app:spb_progressiveStop_speed="3.4"
+                        app:spb_reversed="true"
+                        app:spb_sections_count="4"
+                        app:spb_speed="2.0"
+                        app:spb_stroke_separator_length="4dp"
+                        app:spb_stroke_width="4dp" />
+
+                    <LinearLayout
+                        android:id="@+id/progressBar_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#40000000"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:indeterminate="true"
+                            app:cpb_color="@color/color_FF6E2B" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_696B79" />
+
+        <Button
+            android:id="@+id/btn_name_card_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:background="@drawable/namecard_btn_rounded"
+            android:text="명함 등록"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            app:backgroundTint="@null"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

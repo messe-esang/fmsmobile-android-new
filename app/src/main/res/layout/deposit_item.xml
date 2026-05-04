@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:id="@+id/receivable_detail_item_layout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+        <TextView
+                android:id="@+id/receivable_detail_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:gravity="center"
+                android:textColor="@color/color_class_event"
+                android:textSize="15dp"/>
+
+        <TextView
+                android:id="@+id/receivable_detail_msg"
+                style="@style/TextBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/color_9A9A9A"/>
+
+        <TextView
+                android:id="@+id/receivable_detail_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/color_030303"
+                android:textSize="18dp"
+                android:textStyle="bold"/>
+
+        <TextView
+                android:id="@+id/receivable_detail_unit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:gravity="right"
+                android:text="원"
+                android:textColor="@color/color_9A9A9A"
+                android:textSize="18dp"
+                android:textStyle="bold"/>
+    </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_gray"/>
+</LinearLayout>

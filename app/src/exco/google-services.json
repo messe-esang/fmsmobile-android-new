@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "155683761618",
+    "firebase_url": "https://fmsmobile-1d720.firebaseio.com",
+    "project_id": "fmsmobile-1d720",
+    "storage_bucket": "fmsmobile-1d720.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155683761618:android:be017224e2359e51",
+        "android_client_info": {
+          "package_name": "net.e_sang.fmsmobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQDhvkOO-0ZVKXZe9S6cq7JImlUij-nqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155683761618:android:6a9f1c451ee8631054ac0b",
+        "android_client_info": {
+          "package_name": "net.e_sang.fmsmobile.exco"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQDhvkOO-0ZVKXZe9S6cq7JImlUij-nqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sales_type">
+        <item>Meet-in</item>
+        <item>Meet-out</item>
+        <item>Call-in</item>
+        <item>Call-out</item>
+    </string-array>
+</resources>

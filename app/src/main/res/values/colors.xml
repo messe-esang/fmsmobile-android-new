@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="color_primary">#008577</color>-->
+    <!--<color name="color_primary_dark">#00574B</color>-->
+    <!--<color name="color_accent">#D81B60</color>-->
+    <color name="color_primary">#F37E23</color>
+    <color name="color_primary_dark">#E76F23</color>
+    <!--<color name="color_accent">#FEC434</color>-->   <!-- 눈에 띄지 않음 -->
+    <color name="color_accent">#FF9800</color>
+    <color name="color_disabled">#CCCCCC</color>
+
+    <color name="color_gray">#C9C9C9</color>
+    <color name="color_gray_dark">#6e6e6e</color>
+    <color name="color_gray_darkdark">#4a4a4a</color>
+    <color name="color_gray_light">#F1F1F1</color>
+    <color name="color_gray_light_translucent">#55F1F1F1</color>
+    <color name="color_gray_light_header">#FAFAFA</color>
+
+    <color name="color_text_high">#FF000000</color>
+    <color name="color_text_medium">#DE000000</color>
+    <color name="color_text_low">#99000000</color>
+    <color name="color_text_disabled">#61000000</color>
+    <!--<color name="color_text_error">#FFB00020</color>-->
+    <color name="color_text_error">#FFDD2C00</color>
+
+    <color name="color_class_company">#646464</color>       <!-- 업체 -->
+    <color name="color_class_allocation">#6BD096</color>    <!-- 배정 -->
+    <color name="color_class_sales">#EE965E</color>         <!-- 영업 -->
+    <color name="color_class_notification">#6468B8</color>  <!-- 알림 -->
+    <color name="color_class_receivable">#5A96E0</color>    <!-- 채권 -->
+    <color name="color_class_event">#6A7893</color>         <!-- 행사 -->
+    <color name="color_DC6A7A">#DC6A7A</color>  <!-- 모든 붉은 글자 색 -->
+    <color name="color_9A9A9A">#9A9A9A</color>  <!-- 행사 상세 글자 색 -->
+    <color name="color_030303">#030303</color>  <!-- 행사 리스트 Title 글자 색 -->
+    <color name="color_A98AD0">#A98AD0</color>  <!-- 알림 화면 버튼 색상 -->
+
+    <color name="color_E0E0E3">#E0E0E3</color>
+    <color name="color_B1B8C8">#B1B8C8</color>
+    <color name="color_F8F8F8">#F8F8F8</color>
+
+    <integer-array name="home_colors">
+        <item>@color/color_class_allocation</item>
+        <item>@color/color_class_sales</item>
+        <item>@color/color_class_receivable</item>
+        <item>@color/color_class_notification</item>
+        <item>@color/color_class_event</item>
+    </integer-array>
+
+    <color name="color_C9B5AF">#C9B5AF</color>  <!-- 사전등록 -->
+    <color name="color_FFF4D5">#FFDA72</color>  <!-- 연별입장객통계 -->
+    <color name="color_D9CCB6">#D4B88A</color>  <!-- 입장객현황 -->
+
+    <color name="color_ED7D31">#ED7D31</color>  <!-- 막대그래프1 사전등록-->
+    <color name="color_4472C4">#4472C4</color>  <!-- 막대그래프2 사전등록-->
+    <color name="color_67A83C">#67A83C</color>  <!-- 꺾은선그래프1 -->
+    <color name="color_FFBB00">#FFBB00</color>  <!-- 꺾은선그래프2 -->
+    <color name="color_4E94D2">#4E94D2</color>  <!-- 꺾은선그래프3 -->
+    <color name="color_9F9F9F">#9F9F9F</color>  <!-- 꺾은선그래프4 -->
+    <color name="color_EC7626">#EC7626</color>  <!-- 꺾은선그래프5 -->
+    <color name="color_396AC0">#396AC0</color>  <!-- 꺾은선그래프6 -->
+    <color name="color_FAFFD5">#FAFFD5</color>  <!-- 올해 연도 배경색-->
+
+    <color name="color_F5C850">#F5C850</color>  <!-- 막대그래프1 입장객현황-->
+    <color name="color_81A9E5">#81A9E5</color>  <!-- 막대그래프2 입장객현황-->
+    <color name="color_E66C6C">#E66C6C</color>  <!-- 막대그래프3 입장객현황-->
+    <color name="color_BDCF68">#BDCF68</color>  <!-- 막대그래프4 입장객현황-->
+    <color name="color_A9ACCC">#A9ACCC</color>  <!-- 막대그래프5 입장객현황-->
+    <color name="color_C4ECD5">#C4ECD5</color>  <!-- 배정요청 선택-->
+
+    <color name="color_FCFFD0">#FCFFD0</color>  <!-- 건축전시-->
+    <color name="color_AEE4FF">#AEE4FF</color>  <!-- 리빙전시-->
+    <color name="color_B5C7ED">#B5C7ED</color>  <!-- 산업전시-->
+    <color name="color_BEE9B4">#BEE9B4</color>  <!-- 코베전시-->
+    <color name="color_F2CFA5">#F2CFA5</color>  <!-- 통합IT실-->
+
+    <color name="color_EDF1D0">#EDF1D0</color>
+    <color name="color_BDDDF5">#BDDDF5</color>
+    <color name="color_blue">#0000FF</color>
+    <color name="color_219BF1">#219BF1</color>
+    <color name="color_35A4F3">#35A4F3</color>
+    <color name="color_FFD400">#FFD400</color>
+
+    <color name="color_80000000">#80000000</color>
+
+    <color name="color_F9FAFB">#F9FAFB</color>
+    <color name="color_FF6E2B">#FF6E2B</color>
+    <color name="color_696B79">#696B79</color>
+    <color name="color_F8F8FA">#F8F8FA</color>
+    <color name="color_8B8C9A">#8B8C9A</color>
+    <color name="color_CFD0DA">#CFD0DA</color>
+    <color name="color_B7B9CB">#B7B9CB</color>
+    <color name="color_FF00FF00">#FF00FF00</color>
+    <color name="black">#000000</color>
+
+</resources>

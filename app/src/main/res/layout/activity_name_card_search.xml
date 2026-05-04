@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".ui.SearchActivity">
+
+    <include layout="@layout/include_toolbar" />
+
+    <LinearLayout
+        android:id="@+id/info_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/namecard_gray_rounded_bg"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/id_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="25dp"
+                    android:text="담당자"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/id_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="25dp"
+                    android:layout_toEndOf="@+id/id_title"
+                    android:text="홍길동"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/id_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="25dp"
+                    android:layout_toEndOf="@+id/id_name"
+                    android:text="01086910524"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/id_company_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="25dp"
+                    android:text="업체명"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/id_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_toEndOf="@+id/id_company_title"
+                    android:text="이상네트웍스"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ===== 스크롤 영역 ===== -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollArea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_description"
+        android:layout_below="@+id/info_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <!-- ========================= -->
+            <!-- 휴대전화번호 검색 결과 -->
+            <!-- ========================= -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/namecard_gray_rounded_bg"
+                android:padding="0dp">
+
+                <!-- Header -->
+                <LinearLayout
+                    android:id="@+id/layoutPhoneHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/namecard_dark_gray_rounded_bg"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="휴대전화번호 검색 결과"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/phone_count"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgPhoneArrow"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_arrow_down" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/layoutPhoneHeader">
+                    <!-- 결과 RecyclerView -->
+                    <net.e_sang.fmsmobile.kit.MaxHeightRecyclerView
+                        android:id="@+id/phoneRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/namecard_gray_rounded_bg"
+                        android:nestedScrollingEnabled="true"
+                        android:padding="10dp"
+                        app:maxHeight="350dp" />
+
+                    <LinearLayout
+                        android:id="@+id/txtEmptyPhone_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            style="@style/TextSubTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="휴대전화번호가 일치하는 담당자가 존재하지 않습니다."
+                            android:textColor="@color/color_text_high"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            style="@style/TextSubTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:text="기존 업체의 신규 담당자로 등록하거나,\n신규업체 담당자로 등록할 수 있습니다."
+                            android:textColor="@color/color_text_low"
+                            android:textSize="13dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/progressBar_Phone_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:indeterminate="true"
+                            app:cpb_color="@color/color_primary" />
+                    </LinearLayout>
+
+                    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+                        android:id="@+id/progressBar_Phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:indeterminate="true"
+                        android:visibility="invisible"
+                        app:spb_color="@color/color_class_event"
+                        app:spb_mirror_mode="true"
+                        app:spb_progressiveStart_activated="false"
+                        app:spb_progressiveStart_speed="2.0"
+                        app:spb_progressiveStop_speed="3.4"
+                        app:spb_reversed="true"
+                        app:spb_sections_count="4"
+                        app:spb_speed="2.0"
+                        app:spb_stroke_separator_length="4dp"
+                        app:spb_stroke_width="4dp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <!-- ========================= -->
+            <!-- 업체명 검색 결과 -->
+            <!-- ========================= -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/namecard_gray_rounded_bg"
+                android:orientation="vertical"
+                android:padding="0dp">
+
+                <LinearLayout
+                    android:id="@+id/layoutCompanyHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/namecard_dark_gray_rounded_bg"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="업체명 검색 결과"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/company_count"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgCompanyArrow"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_arrow_down" />
+                </LinearLayout>
+
+                <!-- 검색창 -->
+                <EditText
+                    android:id="@+id/editSearch"
+                    style="@style/TextSubTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/namecard_edit_rounded_bg"
+                    android:drawableStart="@android:drawable/ic_menu_search"
+                    android:drawablePadding="10dp"
+                    android:hint="업체명/브랜드명 검색"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text" />
+
+                <!-- 업체 RecyclerView -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_below="@+id/editSearch">
+
+                    <net.e_sang.fmsmobile.kit.MaxHeightRecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/namecard_gray_rounded_bg"
+                        android:nestedScrollingEnabled="true"
+                        android:padding="10dp"
+                        app:maxHeight="350dp" />
+
+                    <LinearLayout
+                        android:id="@+id/txtEmpty_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            style="@style/TextSubTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="업체명이 일치하는 FMS 등록 기업이 존재하지 않습니다."
+                            android:textColor="@color/color_text_high"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            style="@style/TextSubTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:text="검색어를 변경하거나,\n신규업체를 생성할 수 있습니다."
+                            android:textColor="@color/color_text_low"
+                            android:textSize="13dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/progressBar_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:indeterminate="true"
+                            app:cpb_color="@color/color_primary" />
+                    </LinearLayout>
+
+                    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+                        android:id="@+id/progressBar_Company"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:indeterminate="true"
+                        android:visibility="invisible"
+                        app:spb_color="@color/color_class_event"
+                        app:spb_mirror_mode="true"
+                        app:spb_progressiveStart_activated="false"
+                        app:spb_progressiveStart_speed="2.0"
+                        app:spb_progressiveStop_speed="3.4"
+                        app:spb_reversed="true"
+                        app:spb_sections_count="4"
+                        app:spb_speed="2.0"
+                        app:spb_stroke_separator_length="4dp"
+                        app:spb_stroke_width="4dp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_layout"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="3dp"
+            android:background="@color/color_gray" />
+
+        <TextView
+            android:id="@+id/btn_txt_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="찾는 정보가 없으신가요?"
+            android:textColor="@color/color_DC6A7A"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="15dp">
+
+        <LinearLayout
+            android:id="@+id/btn_new_company_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/namecard_btn_line_rounded"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:text="신규 업체의 담당자로 등록하기"
+                android:textColor="@color/color_FF6E2B"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

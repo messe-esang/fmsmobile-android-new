@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Disabled 상태 -->
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <stroke android:width="1dp" android:color="@color/color_CFD0DA" />
+            <solid android:color="@color/color_F8F8FA" />
+            <corners android:radius="7dp" />
+        </shape>
+    </item>
+
+    <!-- Enabled 상태 -->
+    <item android:state_enabled="true">
+        <shape android:shape="rectangle">
+            <stroke android:width="1dp" android:color="@color/color_CFD0DA" />
+            <solid android:color="@android:color/white" />
+            <corners android:radius="7dp" />
+        </shape>
+    </item>
+</selector>

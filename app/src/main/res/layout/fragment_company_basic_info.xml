@@ -1,0 +1,392 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:nestedScrollingEnabled="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin_little"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin_little"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextBody"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="start|center_vertical"
+                android:maxLines="3"
+                android:text="업체명"
+                android:textColor="@color/color_text_low" />
+
+            <TextView
+                android:id="@+id/txtCompanyName"
+                style="@style/TextBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:ellipsize="end"
+                android:gravity="end|center_vertical"
+                android:maxLines="3"
+                android:text=""
+                android:textColor="@color/color_text_high" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/padding_content"
+            android:layout_marginBottom="@dimen/padding_content"
+            android:background="@color/color_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextBody"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="start|center_vertical"
+                android:maxLines="3"
+                android:text="브랜드명"
+                android:textColor="@color/color_text_low" />
+
+            <TextView
+                android:id="@+id/txtBrandName"
+                style="@style/TextBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:ellipsize="end"
+                android:gravity="end|center_vertical"
+                android:maxLines="3"
+                android:text=""
+                android:textColor="@color/color_text_high" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/padding_content"
+            android:layout_marginBottom="@dimen/padding_content"
+            android:background="@color/color_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/TextBody"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="start|center_vertical"
+                android:maxLines="3"
+                android:text="상호"
+                android:textColor="@color/color_text_low" />
+
+            <TextView
+                android:id="@+id/txtShopName"
+                style="@style/TextBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:ellipsize="end"
+                android:gravity="end|center_vertical"
+                android:maxLines="3"
+                android:text=""
+                android:textColor="@color/color_text_high" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/padding_content"
+            android:layout_marginBottom="@dimen/padding_content"
+            android:background="@color/color_gray"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextBody"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="start|center_vertical"
+                android:maxLines="3"
+                android:text="사업자등록번호"
+                android:textColor="@color/color_text_low" />
+
+            <TextView
+                android:id="@+id/txtBizNum"
+                style="@style/TextBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:ellipsize="end"
+                android:gravity="end|center_vertical"
+                android:maxLines="3"
+                android:text=""
+                android:textColor="@color/color_text_high" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/padding_content"
+            android:layout_marginBottom="@dimen/padding_content"
+            android:background="@color/color_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextBody"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="start|center_vertical"
+                android:maxLines="3"
+                android:text="대표자"
+                android:textColor="@color/color_text_low" />
+
+            <TextView
+                android:id="@+id/txtRepresentation"
+                style="@style/TextBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:ellipsize="end"
+                android:gravity="end|center_vertical"
+                android:maxLines="3"
+                android:text=""
+                android:textColor="@color/color_text_high" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/padding_content"
+            android:layout_marginBottom="@dimen/padding_content"
+            android:background="@color/color_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextBody"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="start|center_vertical"
+                android:maxLines="3"
+                android:text="주소"
+                android:textColor="@color/color_text_low" />
+
+            <TextView
+                android:id="@+id/txtAddr"
+                style="@style/TextBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:ellipsize="end"
+                android:gravity="end|center_vertical"
+                android:maxLines="3"
+                android:text=""
+                android:textColor="@color/color_text_high" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/padding_content"
+            android:layout_marginBottom="@dimen/padding_content"
+            android:background="@color/color_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextBody"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="start|center_vertical"
+                android:maxLines="3"
+                android:text="품목"
+                android:textColor="@color/color_text_low" />
+
+            <TextView
+                android:id="@+id/txtItemName"
+                style="@style/TextBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:ellipsize="end"
+                android:gravity="end|center_vertical"
+                android:maxLines="3"
+                android:text=""
+                android:textColor="@color/color_text_high" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/padding_content"
+            android:layout_marginBottom="@dimen/padding_content"
+            android:background="@color/color_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextBody"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="start|center_vertical"
+                android:maxLines="3"
+                android:text="홈페이지"
+                android:textColor="@color/color_text_low" />
+
+            <TextView
+                android:id="@+id/txtHomepage"
+                style="@style/TextBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:autoLink="web"
+                android:ellipsize="end"
+                android:gravity="end|center_vertical"
+                android:maxLines="3"
+                android:text=""
+                android:textColor="@color/color_text_high" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/padding_content"
+            android:layout_marginBottom="@dimen/padding_content"
+            android:background="@color/color_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextBody"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="start|center_vertical"
+                android:maxLines="3"
+                android:text="업체계정"
+                android:textColor="@color/color_text_low" />
+
+            <TextView
+                android:id="@+id/txtUSER_ID"
+                style="@style/TextBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:autoLink="web"
+                android:ellipsize="end"
+                android:gravity="end|center_vertical"
+                android:maxLines="3"
+                android:text=""
+                android:textColor="@color/color_text_high" />
+
+            <Button
+                android:id="@+id/btnResetPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:padding="0dp"
+                android:text="비밀번호 초기화"
+                android:layout_marginStart="5dp"
+                android:textSize="11dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/padding_content"
+            android:background="@color/color_gray" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <TextView
+        style="@style/TextSubTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="담당자"
+        android:textColor="@color/color_text_high" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="200dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/txtEmpty"
+            style="@style/TextSubTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="표시할 담당자 정보가 없습니다."
+            android:textColor="@color/color_text_low"
+            android:visibility="visible" />
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".namecard.NewCompanyActivity">
+
+    <include layout="@layout/include_toolbar" />
+
+    <ScrollView
+        android:id="@+id/scroll_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_layout"
+        android:layout_below="@id/toolbar"
+        android:layout_marginBottom="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_layout"
+            android:layout_margin="16dp"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/namecard_gray_rounded_bg"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="명함 이미지"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/image_view_crop"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_new_company_spinner_2"
+                    android:contentDescription="촬영한 명함이미지"
+                    android:maxWidth="360dp"
+                    android:maxHeight="200dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/namecardempty" />
+
+                <Button
+                    android:id="@+id/btn_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/namecard_cardview_rounded_bg"
+                    android:drawableLeft="@drawable/ic_name_card_recamera"
+                    android:padding="4dp"
+                    android:text="@string/str_title_name_card_camera"
+                    app:backgroundTint="@null"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/namecard_gray_rounded_bg"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="담당자"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="0dp"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/txt_department"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="0dp"
+                        android:textColor="@color/black" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txt_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="start"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txt_tel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="start"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="start"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="실물 명함과의 일치여부를 확인해주세요."
+                android:textColor="@color/color_DC6A7A"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/namecard_gray_rounded_bg"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="업체 정보"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="업체명"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/txt_company"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:gravity="start"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="주소"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/edt_address"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/namecard_edit_rounded_bg"
+                        android:gravity="center"
+                        android:hint="주소"
+                        android:inputType="text|textMultiLine"
+                        android:minHeight="45dp"
+                        android:padding="8dp"
+                        android:scrollHorizontally="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/color_CFD0DA" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="홈페이지"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/edt_homepage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/namecard_edit_rounded_bg"
+                        android:gravity="center"
+                        android:hint="홈페이지"
+                        android:inputType="text|textMultiLine"
+                        android:minHeight="45dp"
+                        android:padding="8dp"
+                        android:scrollHorizontally="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/color_CFD0DA" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="팩스"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/edt_fax"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/namecard_edit_rounded_bg"
+                        android:gravity="center"
+                        android:hint="팩스"
+                        android:inputType="text|textMultiLine"
+                        android:minHeight="45dp"
+                        android:padding="8dp"
+                        android:scrollHorizontally="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/color_CFD0DA" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color_B7B9CB" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="0dp"
+                            android:layout_weight="0.2"
+                            android:gravity="center"
+                            android:text="구분"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/division_radioGroup"
+                            android:layout_width="0dp"
+                            android:layout_height="43dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_weight="0.8"
+                            android:background="@drawable/bg_segment_container"
+                            android:orientation="horizontal"
+                            android:padding="2dp">
+
+                            <RadioButton
+                                android:id="@+id/radioDomestic"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="1dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/selector_bg"
+                                android:button="@null"
+                                android:checked="true"
+                                android:gravity="center"
+                                android:text="국내"
+                                android:textColor="@drawable/selector_txt" />
+
+                            <RadioButton
+                                android:id="@+id/radioGlobal"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="1dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/selector_bg"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="해외"
+                                android:textColor="@drawable/selector_txt" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/progressBar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/include_toolbar"
+        android:background="#40000000"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:indeterminate="true"
+            app:cpb_color="@color/color_FF6E2B" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="14dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_name_card_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/namecard_btn_rounded"
+            android:text="정보 저장하기"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:textStyle="normal" />
+
+    </LinearLayout>
+
+</RelativeLayout>

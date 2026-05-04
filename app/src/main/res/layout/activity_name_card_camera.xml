@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_layout">
+
+            <!-- 카메라 미리보기 -->
+            <androidx.camera.view.PreviewView
+                android:id="@+id/previewView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <!-- 명함 가이드 Overlay -->
+            <net.e_sang.fmsmobile.kit.CameraOCROverlayView
+                android:id="@+id/overlayView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/txt_auto_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txt_guide"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/color_FF00FF00"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/txt_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="* 촬영 버튼을 직접 누르시거나 \n최대한 명함을 가이드에 맞게 2초간 유지해 주세요."
+            android:textColor="@android:color/white"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <RelativeLayout
+            android:id="@+id/btn_layout"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+            <!-- 촬영 버튼 -->
+
+            <Button
+                android:id="@+id/btnGallery"
+                android:layout_width="49dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="end"
+                android:layout_margin="24dp"
+                android:background="@drawable/namecard_cardview_rounded_bg"
+                android:drawableTop="@drawable/ic_name_card_gallery"
+                android:padding="4dp"
+                android:text="사진첩"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:backgroundTint="@null" />
+
+            <ImageButton
+                android:id="@+id/btnCapture"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="24dp"
+                android:background="@drawable/action_btn_camera"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="촬영" />
+
+            <Button
+                android:id="@+id/btn_Portrait"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="end"
+                android:layout_margin="24dp"
+                android:background="@drawable/namecard_cardview_rounded_bg"
+                android:drawableTop="@drawable/nav_name_card"
+                android:padding="4dp"
+                android:text="세로\n명함"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:backgroundTint="@null" />
+        </RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>

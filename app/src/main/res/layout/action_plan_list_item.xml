@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/action_plan_layoutItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical">
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="0.25dp"
+            android:background="@color/color_class_company" />
+    <TextView
+            android:id="@+id/dept_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="@color/color_030303"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+    <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="@color/color_030303"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="0.25dp"
+            android:layout_below="@+id/dept_desc"
+            android:background="@color/color_class_company" />
+
+    <LinearLayout
+            android:id="@+id/comment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+    </LinearLayout>
+</RelativeLayout>

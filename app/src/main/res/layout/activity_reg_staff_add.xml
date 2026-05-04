@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.RegStaffAddActivity">
+
+    <include layout="@layout/include_toolbar" />
+
+    <ScrollView
+        android:id="@+id/scrlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/botbut"
+        android:layout_below="@id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingTop="10dp"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    style="@style/TextSubTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="▶ 업체 담당자 정보"
+                    android:textColor="@color/color_text_high"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E7E7E7"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextSubTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="이 름"
+                        android:textColor="@color/color_text_high"
+                        android:textStyle="bold" />
+
+                    <EditText
+
+                        android:id="@+id/edtStaffName"
+                        android:layout_width="0dp"
+                        android:layout_height="43dp"
+                        android:layout_weight="4"
+                        android:background="@drawable/sales_btn_bg"
+                        android:padding="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutErrorManagers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E7E7E7"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        style="@style/TextError"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="* 이름은 필수 항목 입니다."
+                        android:textColor="@color/color_text_error" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="#E7E7E7"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextSubTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="직 함"
+                        android:textColor="@color/color_text_high"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtStaffPosition"
+                        android:layout_width="0dp"
+                        android:layout_height="43dp"
+                        android:layout_weight="4"
+                        android:background="@drawable/sales_btn_bg"
+                        android:padding="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="#E7E7E7"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextSubTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="부 서"
+                        android:textColor="@color/color_text_high"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtStaffDept"
+                        android:layout_width="0dp"
+                        android:layout_height="43dp"
+                        android:layout_weight="4"
+                        android:background="@drawable/sales_btn_bg"
+                        android:padding="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="#E7E7E7"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextSubTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="휴대폰"
+                        android:textColor="@color/color_text_high"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtStaffMobile"
+                        android:layout_width="0dp"
+                        android:layout_height="43dp"
+                        android:layout_weight="4"
+                        android:background="@drawable/sales_btn_bg"
+                        android:digits="+0123456789"
+                        android:inputType="phone"
+                        android:padding="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="#E7E7E7"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextSubTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="이메일"
+                        android:textColor="@color/color_text_high"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtStaffEmail"
+                        android:layout_width="0dp"
+                        android:layout_height="43dp"
+                        android:layout_weight="4"
+                        android:background="@drawable/sales_btn_bg"
+                        android:inputType="textEmailAddress"
+                        android:padding="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="#E7E7E7"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextSubTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="연락처"
+                        android:textColor="@color/color_text_high"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtStaffPhone"
+                        android:layout_width="0dp"
+                        android:layout_height="43dp"
+                        android:layout_weight="4"
+                        android:background="@drawable/sales_btn_bg"
+                        android:digits="+0123456789"
+                        android:inputType="phone"
+                        android:padding="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="#E7E7E7"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextSubTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="구분"
+                        android:textColor="@color/color_text_high"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/ckRole1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="비즈매칭"
+                                android:textColor="@color/black" />
+
+                            <CheckBox
+                                android:id="@+id/ckRole2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="세금"
+                                android:textColor="@color/black" />
+
+                            <CheckBox
+                                android:id="@+id/ckRole3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="영업"
+                                android:textColor="@color/black" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/ckRole4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="온라인"
+                                android:textColor="@color/black" />
+
+                            <CheckBox
+                                android:id="@+id/ckRole5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="총괄"
+                                android:textColor="@color/black" />
+
+                            <CheckBox
+                                android:id="@+id/ckRole6"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="현장"
+                                android:textColor="@color/black" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/ckEmail"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="#E7E7E7"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:text="이메일 수신"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/ckSMS"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:background="#E7E7E7"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:text="SMS 수신"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/ckWork"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="#E7E7E7"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:text="재직 여부"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/botbut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="18dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnOK"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/staff_add_btn_bg"
+            android:text="저 장"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/staff_add_btn_bg"
+            android:text="취 소"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:backgroundTint="@null" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/progressBar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#40000000"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:indeterminate="true"
+            app:cpb_color="@color/color_class_sales" />
+    </LinearLayout>
+</RelativeLayout>
