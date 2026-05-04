@@ -61,6 +61,7 @@ public class NameCardCameraActivity extends BaseActivity {
     private boolean autoCaptureTriggered = false;
     private TextView txt_auto_text;
     private SoundManager soundManager;
+    private boolean openGallery = false;
 
     // ====== 갤러리 선택 ======
     private final ActivityResultLauncher<String> galleryLauncher =
@@ -68,6 +69,7 @@ public class NameCardCameraActivity extends BaseActivity {
                 if (uri != null) {
                     startCrop(uri);
                 }
+                openGallery = false;
             });
 
     // ====== Crop 결과 ======
@@ -362,8 +364,14 @@ public class NameCardCameraActivity extends BaseActivity {
                 boolean hasEdge = false;
 
                 int diffThreshold = 15;
-                if (Math.abs(c - r) > diffThreshold) { horizontal++; hasEdge = true; }
-                if (Math.abs(c - b) > diffThreshold) { vertical++; hasEdge = true; }
+                if (Math.abs(c - r) > diffThreshold) {
+                    horizontal++;
+                    hasEdge = true;
+                }
+                if (Math.abs(c - b) > diffThreshold) {
+                    vertical++;
+                    hasEdge = true;
+                }
 
                 if (hasEdge) edge++;
             }
@@ -418,8 +426,13 @@ public class NameCardCameraActivity extends BaseActivity {
                 //runOnUiThread(() -> overlayView.setDetected(detected));
 
                 runOnUiThread(() -> {
-                    overlayView.setDetected(detected);
-                    handleAutoCapture(detected);
+                    if (openGallery) {
+                        overlayView.setDetected(false);
+                        handleAutoCapture(false);
+                    } else {
+                        overlayView.setDetected(detected);
+                        handleAutoCapture(detected);
+                    }
                 });
 
             } catch (Exception e) {
@@ -456,7 +469,6 @@ public class NameCardCameraActivity extends BaseActivity {
             }
 
         } else {
-
             // 명함 사라지면 초기화
             detectStartTime = 0;
             autoCaptureTriggered = false;
@@ -488,6 +500,7 @@ public class NameCardCameraActivity extends BaseActivity {
 
     // ====== 갤러리 실행 ======
     private void openGallery() {
+        openGallery = true;
         galleryLauncher.launch("image/*");
     }
 
