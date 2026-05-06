@@ -25,7 +25,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="#F2F2F2"
+                android:background="#FFFFFF"
                 android:paddingRight="0dp"
                 app:tabBackground="@drawable/notice_btn_bg"
                 app:tabGravity="fill"
