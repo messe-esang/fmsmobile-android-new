@@ -385,11 +385,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 //                }
 //            }
 
-            if ("exco".equals(BuildConfig.APP_FLAVOR)) {
-                visibleNameCardBottom = View.GONE;
-            } else {
-                visibleNameCardBottom = View.VISIBLE;
-            }
+//            if ("exco".equals(BuildConfig.APP_FLAVOR)) {
+//                visibleNameCardBottom = View.GONE;
+//            } else {
+//                visibleNameCardBottom = View.VISIBLE;
+//            }
+            visibleNameCardBottom = View.VISIBLE;   //담당자 간편 등록
         }
 
         findViewById(R.id.allocation_layout).setVisibility(visibleAllocation);

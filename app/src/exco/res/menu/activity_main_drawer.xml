@@ -10,7 +10,7 @@
             android:checkable="false"
             android:icon="@drawable/nav_name_card"
             android:title="@string/str_menu_title_6"
-            android:visible="false" />
+            android:visible="true" />
         <item
             android:id="@+id/nav_briefcase"
             android:checkable="false"

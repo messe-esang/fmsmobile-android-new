@@ -5,10 +5,11 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:openDrawer="start">
 
     <LinearLayout
-        android:id="@+id/main_layout"
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -81,7 +82,7 @@
                             android:background="@drawable/main_line_org_bg"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="visible">
 
                             <View
                                 android:layout_width="match_parent"
@@ -846,8 +847,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-
+        android:background="@android:color/white"
         app:headerLayout="@layout/nav_header_main"
+        app:itemBackground="@android:color/transparent"
+        android:theme="@style/Theme.Material3.DynamicColors.Light"
         app:itemIconTint="@color/color_primary"
         app:menu="@menu/activity_main_drawer" />
 </androidx.drawerlayout.widget.DrawerLayout>

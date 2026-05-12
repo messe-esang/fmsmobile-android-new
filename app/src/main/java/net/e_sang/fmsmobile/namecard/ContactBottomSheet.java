@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -161,6 +163,19 @@ public class ContactBottomSheet extends BottomSheetDialogFragment implements Tel
     public void onStart() {
         super.onStart();
         BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
+        if (dialog != null && dialog.getWindow() != null) {
+
+            Window window = dialog.getWindow();
+
+            WindowInsetsControllerCompat controller =
+                    new WindowInsetsControllerCompat(
+                            window,
+                            window.getDecorView()
+                    );
+
+            // 검정 아이콘
+            controller.setAppearanceLightNavigationBars(true);
+        }
         FrameLayout bottomSheet =
                 dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
 
@@ -304,60 +319,280 @@ public class ContactBottomSheet extends BottomSheetDialogFragment implements Tel
         }
     }
 
+//    private void uploadImage(int company_id, NameCardList nameCardList, String staff_id) {
+//        new Thread(() -> {
+//            try {
+//
+//                File file = new File(nameCardList.image.replace("file:", ""));
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        // mProgressBarLayout.setVisibility(View.VISIBLE);
+//                    }
+//                });
+//                UserInfo userInfo = PrefKit.getUserInfo(getContext());
+//
+//                HashMap<String, String> body = new HashMap<>();
+//                body.put("COMPANY_ID", String.valueOf(company_id));
+//                body.put("COMPANY_NAME", nameCardList.company);
+//                body.put("HOMEPAGE", nameCardList.homepage);
+//                body.put("ADDR", nameCardList.address);
+//                body.put("COMPANY_STAFF_ID", staff_id);
+//                body.put("STAFF_NAME", nameCardList.name);
+//                body.put("STAFF_EMAIL", nameCardList.email);
+//                body.put("STAFF_MOBILE", nameCardList.mobile);
+//                body.put("STAFF_PHONE", nameCardList.tel);
+//                body.put("STAFF_DEPT", nameCardList.department);
+//                body.put("STAFF_POSITION", nameCardList.position);
+//                body.put("USER_ID", userInfo.LOGIN_ID);
+//                body.put("COMPANY_STAFF_MEMO", nameCardList.memo);
+//
+//                new TelKit(getContext(), result -> {
+//                    if (result.mRequestUrl.equals(TelKit.URL_API_INSERT_OCR_STAFF)) {
+//                        try {
+//                            JSONObject json = new JSONObject(result.mResponse);
+//                            Log.e(TAG, "URL_API_INSERT_OCR_STAFF json : " + json);
+//                            JSONObject resultObj = json.optJSONObject("result");
+//                            Log.e(TAG, "URL_API_INSERT_OCR_STAFF result : " + resultObj);
+//                            if (resultObj != null) {
+//                                String code = resultObj.optString("code");
+//                                String msg = resultObj.optString("msg");
+//                                if ("success".equals(code)) {
+//                                    JSONObject data = json.optJSONObject("data");
+//                                    Log.e(TAG, "getActionPlan onResult data : " + data);
+//                                    assert data != null;
+//                                    getStaffDetail(data.optString("COMPANY_STAFF_ID"));
+//                                }
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                            Toast.makeText(getContext(), "요청한 작업을 처리할 수 없습니다.", Toast.LENGTH_SHORT).show();
+//                        }
+//                    } else {
+//                        Toast.makeText(getContext(), "요청한 작업을 처리할 수 없습니다.", Toast.LENGTH_SHORT).show();
+//                    }
+//                    // mProgressBarLayout.setVisibility(GONE);
+//                    btn_btnAddContact_layout.setEnabled(true);
+//                }).requestMultipart(
+//                        TelKit.URL_API_INSERT_OCR_STAFF,
+//                        body,
+//                        "namecard_image",
+//                        file,
+//                        "image/jpeg",
+//                        0
+//                );
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                btn_btnAddContact_layout.setEnabled(true);
+//            }
+//        }).start();
+//    }
+
     private void uploadImage(int company_id, NameCardList nameCardList, String staff_id) {
+
         new Thread(() -> {
+
             try {
 
-                File file = new File(nameCardList.image.replace("file:", ""));
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // mProgressBarLayout.setVisibility(View.VISIBLE);
-                    }
-                });
+                if (getContext() == null || getActivity() == null) {
+                    return;
+                }
+
+                File file = new File(
+                        nameCardList.image.replace("file:", "")
+                );
+
+                if (!file.exists()) {
+
+                    getActivity().runOnUiThread(() -> {
+
+                        btn_btnAddContact_layout.setEnabled(true);
+
+                        Toast.makeText(
+                                getContext(),
+                                "명함 이미지를 찾을 수 없습니다.",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    });
+
+                    return;
+                }
+
                 UserInfo userInfo = PrefKit.getUserInfo(getContext());
 
+                if (userInfo == null) {
+
+                    getActivity().runOnUiThread(() -> {
+
+                        btn_btnAddContact_layout.setEnabled(true);
+
+                        Toast.makeText(
+                                getContext(),
+                                "사용자 정보를 찾을 수 없습니다.",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    });
+
+                    return;
+                }
+
+                getActivity().runOnUiThread(() -> {
+
+                    btn_btnAddContact_layout.setEnabled(false);
+                    // mProgressBarLayout.setVisibility(View.VISIBLE);
+                });
+
                 HashMap<String, String> body = new HashMap<>();
+
                 body.put("COMPANY_ID", String.valueOf(company_id));
                 body.put("COMPANY_NAME", nameCardList.company);
                 body.put("HOMEPAGE", nameCardList.homepage);
                 body.put("ADDR", nameCardList.address);
                 body.put("COMPANY_STAFF_ID", staff_id);
+
                 body.put("STAFF_NAME", nameCardList.name);
                 body.put("STAFF_EMAIL", nameCardList.email);
                 body.put("STAFF_MOBILE", nameCardList.mobile);
                 body.put("STAFF_PHONE", nameCardList.tel);
                 body.put("STAFF_DEPT", nameCardList.department);
                 body.put("STAFF_POSITION", nameCardList.position);
+
                 body.put("USER_ID", userInfo.LOGIN_ID);
                 body.put("COMPANY_STAFF_MEMO", nameCardList.memo);
 
                 new TelKit(getContext(), result -> {
-                    if (result.mRequestUrl.equals(TelKit.URL_API_INSERT_OCR_STAFF)) {
+
+                    if (getActivity() == null || getContext() == null) {
+                        return;
+                    }
+
+                    getActivity().runOnUiThread(() -> {
+
                         try {
-                            JSONObject json = new JSONObject(result.mResponse);
-                            Log.e(TAG, "URL_API_INSERT_OCR_STAFF json : " + json);
-                            JSONObject resultObj = json.optJSONObject("result");
-                            Log.e(TAG, "URL_API_INSERT_OCR_STAFF result : " + resultObj);
-                            if (resultObj != null) {
-                                String code = resultObj.optString("code");
-                                String msg = resultObj.optString("msg");
-                                if ("success".equals(code)) {
-                                    JSONObject data = json.optJSONObject("data");
-                                    Log.e(TAG, "getActionPlan onResult data : " + data);
-                                    assert data != null;
-                                    getStaffDetail(data.optString("COMPANY_STAFF_ID"));
+
+                            if (result == null) {
+
+                                Toast.makeText(
+                                        getContext(),
+                                        "서버 응답이 없습니다.",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+
+                                return;
+                            }
+
+                            if (!TelKit.URL_API_INSERT_OCR_STAFF.equals(result.mRequestUrl)) {
+
+                                Toast.makeText(
+                                        getContext(),
+                                        "잘못된 요청입니다.",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+
+                                return;
+                            }
+
+                            if (result.mResponse == null ||
+                                    result.mResponse.isEmpty()) {
+
+                                Toast.makeText(
+                                        getContext(),
+                                        "응답 데이터가 없습니다.",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+
+                                return;
+                            }
+
+                            JSONObject json =
+                                    new JSONObject(result.mResponse);
+
+                            Log.e(TAG,
+                                    "URL_API_INSERT_OCR_STAFF json : " + json);
+
+                            JSONObject resultObj =
+                                    json.optJSONObject("result");
+
+                            if (resultObj == null) {
+
+                                Toast.makeText(
+                                        getContext(),
+                                        "응답 형식이 올바르지 않습니다.",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+
+                                return;
+                            }
+
+                            String code =
+                                    resultObj.optString("code");
+
+                            String msg =
+                                    resultObj.optString("msg");
+
+                            Log.e(TAG,
+                                    "URL_API_INSERT_OCR_STAFF code : "
+                                            + code);
+
+                            Log.e(TAG,
+                                    "URL_API_INSERT_OCR_STAFF msg : "
+                                            + msg);
+
+                            if ("success".equals(code)) {
+
+                                JSONObject data =
+                                        json.optJSONObject("data");
+
+                                if (data == null) {
+
+                                    Toast.makeText(
+                                            getContext(),
+                                            "직원 데이터를 찾을 수 없습니다.",
+                                            Toast.LENGTH_SHORT
+                                    ).show();
+
+                                    return;
                                 }
+
+                                String companyStaffId =
+                                        data.optString("COMPANY_STAFF_ID");
+
+                                if (companyStaffId == null ||
+                                        companyStaffId.isEmpty()) {
+
+                                    Toast.makeText(
+                                            getContext(),
+                                            "직원 ID가 없습니다.",
+                                            Toast.LENGTH_SHORT
+                                    ).show();
+
+                                    return;
+                                }
+                                getStaffDetail(companyStaffId);
+                            } else {
+
+                                Toast.makeText(
+                                        getContext(),
+                                        msg,
+                                        Toast.LENGTH_SHORT
+                                ).show();
                             }
                         } catch (Exception e) {
-                            e.printStackTrace();
-                            Toast.makeText(getContext(), "요청한 작업을 처리할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG,
+                                    "uploadImage parse error",
+                                    e);
+                            Toast.makeText(
+                                    getContext(),
+                                    "데이터 처리 중 오류가 발생했습니다.",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        } finally {
+                            btn_btnAddContact_layout.setEnabled(true);
+                            // mProgressBarLayout.setVisibility(View.GONE);
                         }
-                    } else {
-                        Toast.makeText(getContext(), "요청한 작업을 처리할 수 없습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                    // mProgressBarLayout.setVisibility(GONE);
-                    btn_btnAddContact_layout.setEnabled(true);
+                    });
+
                 }).requestMultipart(
                         TelKit.URL_API_INSERT_OCR_STAFF,
                         body,
@@ -368,8 +603,24 @@ public class ContactBottomSheet extends BottomSheetDialogFragment implements Tel
                 );
 
             } catch (Exception e) {
-                e.printStackTrace();
-                btn_btnAddContact_layout.setEnabled(true);
+
+                Log.e(TAG, "uploadImage error", e);
+
+                if (getActivity() != null) {
+
+                    getActivity().runOnUiThread(() -> {
+
+                        btn_btnAddContact_layout.setEnabled(true);
+
+                        // mProgressBarLayout.setVisibility(View.GONE);
+
+                        Toast.makeText(
+                                getContext(),
+                                "이미지 업로드에 실패했습니다.",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    });
+                }
             }
         }).start();
     }

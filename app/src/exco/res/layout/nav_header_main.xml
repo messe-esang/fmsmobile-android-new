@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/white"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/ThemeOverlay.MaterialComponents.Light">
 
     <View
         android:layout_width="match_parent"
@@ -21,15 +22,17 @@
         android:layout_marginTop="55dp"
         android:contentDescription="@string/app_name"
         app:srcCompat="@drawable/splash_logo" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="2dp"
+        android:layout_marginEnd="8dp"
         android:text="Fair management System"
-        android:textStyle="bold"
+        android:textColor="@color/color_gray_dark"
         android:textSize="18dp"
-        android:textColor="@color/color_primary_dark" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/nav_team"
@@ -37,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
+        android:layout_marginEnd="8dp"
         android:textColor="@color/color_gray_darkdark" />
 
     <TextView
@@ -45,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/color_gray_darkdark" />
 

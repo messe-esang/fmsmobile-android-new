@@ -9,13 +9,13 @@
         android:icon="@drawable/btn_calendar_bg_ripple"
         android:title="Action Plan"
         android:visible="false"
-        app:showAsAction="always"></item>
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/logout"
         android:icon="@drawable/btn_logout_bg_ripple"
         android:title="Logout"
         android:visible="false"
-        app:showAsAction="always"></item>
+        app:showAsAction="always"/>
 
 </menu>

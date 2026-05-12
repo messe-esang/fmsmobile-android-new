@@ -252,66 +252,238 @@ public class NameCardEditActivity extends BaseActivity implements View.OnClickLi
         return file;
     }
 
+//    private void uploadImage(Uri uri) {
+//        new Thread(() -> {
+//            try {
+//                Log.e(TAG, "uploadImage uri : " + uri);
+//                File file = uriToFile(uri);
+//                Log.e(TAG, "uploadImage file : " + file);
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mProgressBarLayout.setVisibility(VISIBLE);
+//                        image_view_crop.setImageURI(uri);
+//                        PrefKit.setNameCard(NameCardEditActivity.this, null);
+//                    }
+//                });
+//                HashMap<String, String> body = new HashMap<>();
+//
+//                new TelKit(this, result -> {
+//                    if (result.mRequestUrl.equals(TelKit.URL_API_PARSENAMECARD)) {
+//                        try {
+//                            JSONObject json = new JSONObject(result.mResponse);
+//                            JSONObject resultObj = json.optJSONObject("result");
+//                            if (resultObj != null) {
+//                                String code = resultObj.optString("code");
+//                                String msg = resultObj.optString("msg");
+//                                Log.e(TAG, "uploadImage code : " + code);
+//                                Log.e(TAG, "uploadImage msg : " + msg);
+//                                if ("ok".equals(code)) {
+//                                    JSONObject data = json.optJSONObject("data");
+//                                    Log.e(TAG, "getActionPlan onResult data : " + data);
+//                                    OCRNameCard namecard = new OCRNameCard();
+//                                    namecard.name = data.optString("name");
+//                                    namecard.company = data.optString("company");
+//                                    namecard.department = data.optString("department");
+//                                    namecard.position = data.optString("position");
+//                                    namecard.mobile = data.optString("mobile");
+//                                    namecard.tel = data.optString("tel");
+//                                    namecard.email = data.optString("email");
+//                                    namecard.address = data.optString("address");
+//                                    namecard.homepage = data.optString("homepage");
+//                                    namecard.fax = data.optString("fax");
+//                                    namecard.image = file;
+//                                    PrefKit.setNameCard(this, namecard);
+//                                    setOCRNameCard(namecard);
+//                                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+//                                    btn_name_card_save.setEnabled(true);
+//                                    btn_add_contacts.setEnabled(true);
+//                                } else {
+//                                    Toast.makeText(NameCardEditActivity.this, msg + " 다시 촬영해 주세요.", Toast.LENGTH_SHORT).show();
+//                                    btn_add_contacts.setEnabled(false);
+//                                }
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                            Toast.makeText(NameCardEditActivity.this, "요청한 작업을 처리할 수 없습니다.", Toast.LENGTH_SHORT).show();
+//                        }
+//                    } else {
+//                        Toast.makeText(NameCardEditActivity.this, "요청한 작업을 처리할 수 없습니다.", Toast.LENGTH_SHORT).show();
+//                    }
+//                    mProgressBarLayout.setVisibility(GONE);
+//                }).requestMultipart(
+//                        TelKit.URL_API_PARSENAMECARD,
+//                        body,
+//                        "namecard_image",
+//                        file,
+//                        "image/jpeg",
+//                        0
+//                );
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
+//    }
+
     private void uploadImage(Uri uri) {
         new Thread(() -> {
+            File file = null;
+
             try {
                 Log.e(TAG, "uploadImage uri : " + uri);
-                File file = uriToFile(uri);
-                Log.e(TAG, "uploadImage file : " + file);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        image_view_crop.setImageURI(uri);
-                        PrefKit.setNameCard(NameCardEditActivity.this, null);
-                        // Stuff that updates the UI
-                        mProgressBarLayout.setVisibility(VISIBLE);
-                    }
+
+                file = uriToFile(uri);
+
+                if (file == null || !file.exists()) {
+                    runOnUiThread(() -> {
+                        Toast.makeText(
+                                NameCardEditActivity.this,
+                                "이미지 파일을 불러올 수 없습니다.",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    });
+                    return;
+                }
+
+                File finalFile = file;
+
+                runOnUiThread(() -> {
+                    mProgressBarLayout.setVisibility(VISIBLE);
+                    image_view_crop.setImageURI(uri);
+
+                    btn_name_card_save.setEnabled(false);
+                    btn_add_contacts.setEnabled(false);
+
+                    PrefKit.setNameCard(NameCardEditActivity.this, null);
                 });
+
                 HashMap<String, String> body = new HashMap<>();
 
                 new TelKit(this, result -> {
-                    if (result.mRequestUrl.equals(TelKit.URL_API_PARSENAMECARD)) {
+
+                    runOnUiThread(() -> {
                         try {
-                            JSONObject json = new JSONObject(result.mResponse);
-                            JSONObject resultObj = json.optJSONObject("result");
-                            if (resultObj != null) {
-                                String code = resultObj.optString("code");
-                                String msg = resultObj.optString("msg");
-                                Log.e(TAG, "uploadImage code : " + code);
-                                Log.e(TAG, "uploadImage msg : " + msg);
-                                if ("ok".equals(code)) {
-                                    JSONObject data = json.optJSONObject("data");
-                                    Log.e(TAG, "getActionPlan onResult data : " + data);
-                                    OCRNameCard namecard = new OCRNameCard();
-                                    namecard.name = data.optString("name");
-                                    namecard.company = data.optString("company");
-                                    namecard.department = data.optString("department");
-                                    namecard.position = data.optString("position");
-                                    namecard.mobile = data.optString("mobile");
-                                    namecard.tel = data.optString("tel");
-                                    namecard.email = data.optString("email");
-                                    namecard.address = data.optString("address");
-                                    namecard.homepage = data.optString("homepage");
-                                    namecard.fax = data.optString("fax");
-                                    namecard.image = file;
-                                    PrefKit.setNameCard(this, namecard);
-                                    setOCRNameCard(namecard);
-                                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-                                    btn_name_card_save.setEnabled(true);
-                                    btn_add_contacts.setEnabled(true);
-                                } else {
-                                    Toast.makeText(NameCardEditActivity.this, msg + " 다시 촬영해 주세요.", Toast.LENGTH_SHORT).show();
-                                    btn_add_contacts.setEnabled(false);
-                                }
+
+                            Log.e(TAG, "response : " + result.mResponse);
+
+                            if (result == null) {
+                                Toast.makeText(
+                                        NameCardEditActivity.this,
+                                        "서버 응답이 없습니다.",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                                return;
                             }
+
+                            if (!TelKit.URL_API_PARSENAMECARD.equals(result.mRequestUrl)) {
+                                Toast.makeText(
+                                        NameCardEditActivity.this,
+                                        "잘못된 요청입니다.",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                                return;
+                            }
+
+                            if (result.mResponse == null || result.mResponse.isEmpty()) {
+                                Toast.makeText(
+                                        NameCardEditActivity.this,
+                                        "응답 데이터가 없습니다.",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                                return;
+                            }
+
+                            JSONObject json = new JSONObject(result.mResponse);
+
+                            JSONObject resultObj = json.optJSONObject("result");
+
+                            if (resultObj == null) {
+                                Toast.makeText(
+                                        NameCardEditActivity.this,
+                                        "응답 형식이 올바르지 않습니다.",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                                return;
+                            }
+
+                            String code = resultObj.optString("code");
+                            String msg = resultObj.optString("msg");
+
+                            Log.e(TAG, "uploadImage code : " + code);
+                            Log.e(TAG, "uploadImage msg : " + msg);
+
+                            if ("ok".equals(code)) {
+
+                                JSONObject data = json.optJSONObject("data");
+
+                                if (data == null) {
+                                    Toast.makeText(
+                                            NameCardEditActivity.this,
+                                            "명함 데이터를 찾을 수 없습니다.",
+                                            Toast.LENGTH_SHORT
+                                    ).show();
+                                    return;
+                                }
+
+                                OCRNameCard namecard = new OCRNameCard();
+
+                                namecard.name = data.optString("name");
+                                namecard.company = data.optString("company");
+                                namecard.department = data.optString("department");
+                                namecard.position = data.optString("position");
+                                namecard.mobile = data.optString("mobile");
+                                namecard.tel = data.optString("tel");
+                                namecard.email = data.optString("email");
+                                namecard.address = data.optString("address");
+                                namecard.homepage = data.optString("homepage");
+                                namecard.fax = data.optString("fax");
+                                namecard.image = finalFile;
+
+                                PrefKit.setNameCard(
+                                        NameCardEditActivity.this,
+                                        namecard
+                                );
+
+                                setOCRNameCard(namecard);
+
+                                Toast.makeText(
+                                        NameCardEditActivity.this,
+                                        msg,
+                                        Toast.LENGTH_SHORT
+                                ).show();
+
+                                btn_name_card_save.setEnabled(true);
+                                btn_add_contacts.setEnabled(true);
+
+                            } else {
+
+                                btn_name_card_save.setEnabled(false);
+                                btn_add_contacts.setEnabled(false);
+
+                                Toast.makeText(
+                                        NameCardEditActivity.this,
+                                        msg + "\n다시 촬영해 주세요.",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                            }
+
                         } catch (Exception e) {
-                            e.printStackTrace();
-                            Toast.makeText(NameCardEditActivity.this, "요청한 작업을 처리할 수 없습니다.", Toast.LENGTH_SHORT).show();
+
+                            Log.e(TAG, "parse error", e);
+
+                            Toast.makeText(
+                                    NameCardEditActivity.this,
+                                    "데이터 처리 중 오류가 발생했습니다.",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+
+                        } finally {
+
+                            mProgressBarLayout.setVisibility(GONE);
                         }
-                    } else {
-                        Toast.makeText(NameCardEditActivity.this, "요청한 작업을 처리할 수 없습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                    mProgressBarLayout.setVisibility(GONE);
+                    });
+
                 }).requestMultipart(
                         TelKit.URL_API_PARSENAMECARD,
                         body,
@@ -322,7 +494,21 @@ public class NameCardEditActivity extends BaseActivity implements View.OnClickLi
                 );
 
             } catch (Exception e) {
-                e.printStackTrace();
+
+                Log.e(TAG, "uploadImage error", e);
+
+                runOnUiThread(() -> {
+                    mProgressBarLayout.setVisibility(GONE);
+
+                    btn_name_card_save.setEnabled(false);
+                    btn_add_contacts.setEnabled(false);
+
+                    Toast.makeText(
+                            NameCardEditActivity.this,
+                            "이미지 업로드에 실패했습니다.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                });
             }
         }).start();
     }

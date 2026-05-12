@@ -374,7 +374,13 @@ public class NameCardListActivity extends BaseActivity implements View.OnClickLi
                 holder.tvDate.setText("최종 수정 : " + companyStaffInfo.UPDATE_DATE);
             } else {
                 holder.tvDate.setVisibility(INVISIBLE);
+            }
 
+            if (companyStaffInfo.TM_COUNT > 0) {
+                holder.tvCount.setVisibility(View.VISIBLE);
+                holder.tvCount.setText("영업 등록 : " + companyStaffInfo.TM_COUNT);
+            } else {
+                holder.tvCount.setVisibility(INVISIBLE);
             }
 
             holder.tvMobile.setText(companyStaffInfo.STAFF_MOBILE);
@@ -409,7 +415,7 @@ public class NameCardListActivity extends BaseActivity implements View.OnClickLi
         public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             public RecycleAdapter mAdapter;
             public LinearLayout layoutItem;
-            public TextView tvName, tvDate, tvPosition, tvLine, tvCompany, tvMobile;
+            public TextView tvName, tvDate, tvPosition, tvLine, tvCompany, tvMobile, tvCount;
 
             public ItemViewHolder(View itemView, RecycleAdapter mAdapter) {
                 super(itemView);
@@ -422,6 +428,7 @@ public class NameCardListActivity extends BaseActivity implements View.OnClickLi
                 this.tvPosition = itemView.findViewById(R.id.tvPosition);
                 this.tvLine = itemView.findViewById(R.id.tvLine);
                 this.tvMobile = itemView.findViewById(R.id.tvMobile);
+                this.tvCount = itemView.findViewById(R.id.tvCount);
 
                 itemView.setOnClickListener(this);
             }
