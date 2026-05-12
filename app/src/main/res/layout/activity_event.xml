@@ -22,7 +22,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -126,21 +126,21 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
+                        android:layout_weight="0.3"
                         android:gravity="center"
-                        android:paddingLeft="5dp"
-                        android:text="전시회구분"
-                        android:textSize="16dp" />
+                        android:padding="3dp"
+                        android:text="전시회\n구분"
+                        android:textSize="15dp" />
 
                     <com.weiwangcn.betterspinner.library.BetterSpinner
                         android:id="@+id/spinner_event"
                         android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="5dp"
                         android:layout_weight="1"
-                        android:gravity="right|center"
-                        android:hint="선택"
+                        android:gravity="end|center"
+                        android:maxLines="2"
                         android:popupBackground="@android:color/white"
                         android:textSize="16dp"
                         app:met_floatingLabel="highlight" />

@@ -59,6 +59,7 @@ import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
+import net.e_sang.fmsmobile.BuildConfig;
 import net.e_sang.fmsmobile.R;
 import net.e_sang.fmsmobile.data.*;
 import net.e_sang.fmsmobile.kit.Kit;
@@ -345,7 +346,9 @@ public class RegSalesActivity extends BaseActivity implements View.OnClickListen
         });
 
         mWorkGroupCodeItems.add(new WorkGroupCode("행사", "1001"));
-        mWorkGroupCodeItems.add(new WorkGroupCode("전시장", "2001"));
+        //if ("esgroup".equals(BuildConfig.APP_FLAVOR)) {
+            mWorkGroupCodeItems.add(new WorkGroupCode("전시장", "2001"));
+        //}
         mWorkGroupCodeItems.add(new WorkGroupCode("기관/협단체 등", "3001"));
         mWorkGroupCodeItems.add(new WorkGroupCode("기타", "4001"));
         ArrayAdapter<WorkGroupCode> adapterWorkGroupCode = new ArrayAdapter<WorkGroupCode>(this, android.R.layout.simple_list_item_1, mWorkGroupCodeItems);
@@ -663,7 +666,7 @@ public class RegSalesActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void onClosed(SingleDateAndTimePicker singleDateAndTimePicker) {
-                if(mEditDate.getVisibility() != VISIBLE) {
+                if (mEditDate.getVisibility() != VISIBLE) {
                     mBtnRecall.setChecked(false);
                     mEditDate.setVisibility(INVISIBLE);
                     mEditDate.setText("");

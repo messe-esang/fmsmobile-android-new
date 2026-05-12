@@ -43,16 +43,24 @@
                         <TextView
                             android:id="@+id/txtName"
                             style="@style/TextSubTitle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:breakStrategy="simple"
+                            android:ellipsize="end"
+                            android:hyphenationFrequency="none"
+                            android:maxLines="2"
                             android:textColor="@color/color_text_high"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/txtBrandName"
                             style="@style/TextSubTitle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:breakStrategy="simple"
+                            android:ellipsize="end"
+                            android:hyphenationFrequency="none"
+                            android:maxLines="1"
                             android:textColor="@color/color_text_high"
                             android:visibility="gone" />
                     </LinearLayout>
@@ -60,14 +68,14 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginStart="8dp"
                         android:gravity="top">
 
                         <TextView
                             style="@style/TextBody"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin_little"
+                            android:layout_marginEnd="5dp"
                             android:text="등급:"
                             android:textColor="@color/color_text_medium" />
 
@@ -109,7 +117,7 @@
                             android:background="@android:color/white"
                             app:tabBackground="@null"
                             app:tabGravity="center"
-                            app:tabIndicatorColor="@color/color_class_company"
+                            app:tabIndicatorColor="@color/color_primary"
                             app:tabIndicatorHeight="4dp"
                             app:tabMinWidth="50dp"
                             app:tabMode="fixed" />
