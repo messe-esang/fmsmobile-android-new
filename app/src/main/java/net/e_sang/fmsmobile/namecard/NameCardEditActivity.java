@@ -647,9 +647,9 @@ public class NameCardEditActivity extends BaseActivity implements View.OnClickLi
             type_mag = "명함 수정을 취소 하시겠습니까?";
         }
         AlertDialog.Builder alert_confirm = new AlertDialog.Builder(this);
-        alert_confirm.setMessage(type_mag).setCancelable(false).setPositiveButton("아니오",
-                (dialog, which) -> dialog.dismiss()).setNegativeButton("네",
-                (dialog, which) -> finish());
+        alert_confirm.setMessage(type_mag).setCancelable(false).setPositiveButton("네",
+                (dialog, which) -> finish()).setNegativeButton("아니오",
+                (dialog, which) -> dialog.dismiss());
         AlertDialog alert = alert_confirm.create();
         alert.show();
     }

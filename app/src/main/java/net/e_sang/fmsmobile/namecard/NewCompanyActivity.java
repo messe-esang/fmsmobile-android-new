@@ -179,9 +179,9 @@ public class NewCompanyActivity extends BaseActivity implements View.OnClickList
     private void finishDialog() {
         String type_mag = "신규 등록을 취소 하시겠습니까?";
         AlertDialog.Builder alert_confirm = new AlertDialog.Builder(this);
-        alert_confirm.setMessage(type_mag).setCancelable(false).setPositiveButton("아니오",
-                (dialog, which) -> dialog.dismiss()).setNegativeButton("네",
-                (dialog, which) -> finish());
+        alert_confirm.setMessage(type_mag).setCancelable(false).setPositiveButton("네",
+                (dialog, which) -> finish()).setNegativeButton("아니오",
+                (dialog, which) -> dialog.dismiss());
         AlertDialog alert = alert_confirm.create();
         alert.show();
     }

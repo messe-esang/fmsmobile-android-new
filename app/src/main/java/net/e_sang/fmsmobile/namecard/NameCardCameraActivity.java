@@ -230,6 +230,7 @@ public class NameCardCameraActivity extends BaseActivity {
                                     "명함을 가이드에 맞춰주세요",
                                     Toast.LENGTH_SHORT
                             ).show();
+                            handleAutoCapture(false);
                             return;
                         }
 
