@@ -324,7 +324,10 @@ public class NameCardListActivity extends BaseActivity implements View.OnClickLi
             );
 
             long startTime = startCalendar.getTimeInMillis();
-            endDialog.getDatePicker().setMaxDate(startTime);
+            // 시작일 이전 선택 불가
+            endDialog.getDatePicker().setMinDate(startTime);
+            // 오늘 이후 선택 불가
+            endDialog.getDatePicker().setMaxDate(System.currentTimeMillis() + 1000);
 
             if (!isFinishing()) {
                 endDialog.show();
