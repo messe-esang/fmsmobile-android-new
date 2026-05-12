@@ -292,6 +292,9 @@ public class NameCardListActivity extends BaseActivity implements View.OnClickLi
                         startCalendar.set(year, month, dayOfMonth);
                         String startDate = sdf.format(startCalendar.getTime());
                         start_date.setText(startDate);
+                        // 시작일 바뀌면 종료일 초기화
+                        end_date.setText("");
+                        endCalendar = null;
                     },
                     startCalendar.get(Calendar.YEAR),
                     startCalendar.get(Calendar.MONTH),
