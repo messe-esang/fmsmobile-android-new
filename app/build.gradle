@@ -13,7 +13,7 @@ android {
         minSdk 24
         targetSdk 36
         versionCode 1
-        versionName "1.64"
+        versionName "1.65"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,7 +33,7 @@ android {
         exco {
             dimension "fmsmobile"
             versionCode 1
-            versionName "1.02"
+            versionName "1.03"
             applicationIdSuffix ".exco"
             android.buildFeatures.buildConfig = true
             buildConfigField "String", "API_URL", "\"https://fmsmob.exco.co.kr/API\""

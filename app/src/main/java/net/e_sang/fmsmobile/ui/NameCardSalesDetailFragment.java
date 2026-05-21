@@ -315,13 +315,14 @@ public class NameCardSalesDetailFragment extends Fragment implements OnClickList
                             regStaffList -> {
                                 NameCardList nameCardListUpdate = new NameCardList();
                                 nameCardListUpdate.companyStaffId = Integer.parseInt(regStaffList.COMPANY_STAFF_ID);
-                                nameCardListUpdate.department = regStaffList.STAFF_DEPT;
-                                nameCardListUpdate.position = regStaffList.STAFF_POSITION;
-                                nameCardListUpdate.name = regStaffList.STAFF_NAME;
-                                nameCardListUpdate.mobile = regStaffList.STAFF_MOBILE;
-                                nameCardListUpdate.tel = regStaffList.STAFF_PHONE;
-                                nameCardListUpdate.email = regStaffList.STAFF_EMAIL;
+                                nameCardListUpdate.department = nameCardList.department;
+                                nameCardListUpdate.position = nameCardList.position;
+                                nameCardListUpdate.name = nameCardList.name;
+                                nameCardListUpdate.mobile = nameCardList.mobile;
+                                nameCardListUpdate.tel = nameCardList.tel;
+                                nameCardListUpdate.email = nameCardList.name;
                                 nameCardListUpdate.work_flag = regStaffList.WORK_FLAG;
+                                nameCardListUpdate.image = nameCardList.image;
                                 uploadImage(mCompanyInfo, nameCardListUpdate, regStaffList.COMPANY_STAFF_ID);
                             }
                     );
@@ -875,6 +876,9 @@ public class NameCardSalesDetailFragment extends Fragment implements OnClickList
 
         Log.e(TAG, "uploadImage nameCardList.companyId : "
                 + nameCardList.companyId);
+
+        Log.e(TAG, "uploadImage nameCardList.image : "
+                + nameCardList.image);
 
         new Thread(() -> {
 

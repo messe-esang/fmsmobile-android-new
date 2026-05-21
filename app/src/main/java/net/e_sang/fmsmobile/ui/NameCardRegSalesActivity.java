@@ -179,6 +179,7 @@ public class NameCardRegSalesActivity extends BaseActivity implements View.OnCli
             Log.e(TAG, "entry_path : " + entry_path);
             Log.e(TAG, "TYPE : " + TYPE);
             Log.e(TAG, "nameCardList : " + nameCardList.name);
+            Log.e(TAG, "nameCardList : " + nameCardList.image);
         }
 
         mTabLayout.removeAllTabs();

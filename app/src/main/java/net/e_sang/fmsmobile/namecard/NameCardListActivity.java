@@ -469,6 +469,7 @@ public class NameCardListActivity extends BaseActivity implements View.OnClickLi
             body.put("START_DATE", start_date.getText().toString());
             body.put("END_DATE", end_date.getText().toString());
             body.put("USER_ID", Login_id);
+            Log.e(TAG, "Login_id: " + Login_id);
             if (page > 1) {
                 new TelKit(this, this, mProgressBar).request(TelKit.URL_API_OCR_STAFF_LIST, body);
             } else {

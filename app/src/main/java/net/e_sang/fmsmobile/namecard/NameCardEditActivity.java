@@ -42,11 +42,15 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 
+import net.e_sang.fmsmobile.BuildConfig;
 import net.e_sang.fmsmobile.R;
 import net.e_sang.fmsmobile.data.NameCardList;
 import net.e_sang.fmsmobile.data.OCRNameCard;
@@ -106,6 +110,25 @@ public class NameCardEditActivity extends BaseActivity implements View.OnClickLi
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_chevron_left_white_36);
         }
+
+        View root = findViewById(R.id.main);
+
+        ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
+
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            Insets ime = insets.getInsets(WindowInsetsCompat.Type.ime());
+
+            int bottom = Math.max(systemBars.bottom, ime.bottom);
+
+            v.setPadding(
+                    systemBars.left,
+                    systemBars.top,
+                    systemBars.right,
+                    bottom
+            );
+
+            return insets;
+        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -576,10 +599,15 @@ public class NameCardEditActivity extends BaseActivity implements View.OnClickLi
 
         if (!TextUtils.isEmpty(nameCardList.image)) {
             image_view_crop.setImageResource(0);
-            Glide.with(image_view_crop.getContext())
-                    .load("https://mfms.esfair.kr" + nameCardList.image)
-                    .into(image_view_crop);
-
+            if ("exco".equals(BuildConfig.APP_FLAVOR)) {
+                Glide.with(image_view_crop.getContext())
+                        .load("https://fmsmob.exco.co.kr" + nameCardList.image)
+                        .into(image_view_crop);
+            } else {
+                Glide.with(image_view_crop.getContext())
+                        .load("https://mfms.esfair.kr" + nameCardList.image)
+                        .into(image_view_crop);
+            }
         }
 
         if (EDIT_TYPE.equals("1")) {

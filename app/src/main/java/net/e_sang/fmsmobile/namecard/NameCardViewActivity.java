@@ -55,6 +55,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 
+import net.e_sang.fmsmobile.BuildConfig;
 import net.e_sang.fmsmobile.R;
 import net.e_sang.fmsmobile.data.CompanyInfo;
 import net.e_sang.fmsmobile.data.Extra;
@@ -254,11 +255,20 @@ public class NameCardViewActivity extends BaseActivity implements View.OnClickLi
 
         if (!TextUtils.isEmpty(nameCardList.image)) {
             image_view_crop.setImageResource(0);
-            Glide.with(image_view_crop.getContext())
-                    .load("https://mfms.esfair.kr/" + nameCardList.image)
-                    .placeholder(getDrawable(R.drawable.namecardempty))
-                    .error(getDrawable(R.drawable.namecardempty))
-                    .into(image_view_crop);
+            if ("exco".equals(BuildConfig.APP_FLAVOR)) {
+                Glide.with(image_view_crop.getContext())
+                        .load("https://fmsmob.exco.co.kr" + nameCardList.image)
+                        .placeholder(getDrawable(R.drawable.namecardempty))
+                        .error(getDrawable(R.drawable.namecardempty))
+                        .into(image_view_crop);
+            } else {
+                Glide.with(image_view_crop.getContext())
+                        .load("https://mfms.esfair.kr" + nameCardList.image)
+                        .placeholder(getDrawable(R.drawable.namecardempty))
+                        .error(getDrawable(R.drawable.namecardempty))
+                        .into(image_view_crop);
+            }
+
         }
 
         if (mWORK_FLAG.equals("N") || nameCardList.work_flag.equals("N")) {
@@ -552,8 +562,12 @@ public class NameCardViewActivity extends BaseActivity implements View.OnClickLi
             byte[] imageBytes = null;
 
             if (nameCardList.image != null && !nameCardList.image.isEmpty()) {
-
-                Bitmap bitmap = getBitmapFromURL("https://mfms.esfair.kr/" + nameCardList.image);
+                Bitmap bitmap = null;
+                if ("exco".equals(BuildConfig.APP_FLAVOR)) {
+                    bitmap = getBitmapFromURL("https://fmsmob.exco.co.kr/" + nameCardList.image);
+                } else {
+                    bitmap = getBitmapFromURL("https://mfms.esfair.kr/" + nameCardList.image);
+                }
 
                 if (bitmap != null) {
                     Bitmap resized = Bitmap.createScaledBitmap(bitmap, 640, 480, true);
@@ -812,7 +826,12 @@ public class NameCardViewActivity extends BaseActivity implements View.OnClickLi
 
         executor.execute(() -> {
             if (nameCardList.image != null && !nameCardList.image.isEmpty()) {
-                Bitmap bitmap = getBitmapFromURL("https://mfms.esfair.kr/" + nameCardList.image);
+                Bitmap bitmap = null;
+                if ("exco".equals(BuildConfig.APP_FLAVOR)) {
+                    bitmap = getBitmapFromURL("https://fmsmob.exco.co.kr/" + nameCardList.image);
+                } else {
+                    bitmap = getBitmapFromURL("https://mfms.esfair.kr/" + nameCardList.image);
+                }
                 bitmap = Bitmap.createScaledBitmap(bitmap, 640, 480, true);
                 Bitmap finalBitmap = bitmap;
                 runOnUiThread(() -> {
