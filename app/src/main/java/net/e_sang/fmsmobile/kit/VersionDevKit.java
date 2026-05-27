@@ -157,7 +157,13 @@ public class VersionDevKit implements TelKit.OnResultListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        Intent intentUrl = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.URL_DOWNLOAD_APK));
+                        Intent intentUrl;
+                        if ("exco".equals(BuildConfig.APP_FLAVOR)) {
+                            intentUrl = new Intent(Intent.ACTION_VIEW, Uri.parse("https://fms.exco.co.kr/excoapp.html"));
+                        } else {
+                            intentUrl = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.URL_DOWNLOAD_APK));
+                        }
+
                         mActivity.startActivity(intentUrl);
                         mActivity.finishAffinity();
                     }

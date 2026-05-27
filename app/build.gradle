@@ -38,7 +38,7 @@ android {
             android.buildFeatures.buildConfig = true
             buildConfigField "String", "API_URL", "\"https://fmsmob.exco.co.kr/API\""
             buildConfigField "String", "APK_FILE_NAME", "\"EXCOFMS.apk\""
-            buildConfigField "String", "URL_DOWNLOAD_APK", "\"https://fms.exco.co.kr/\""
+            buildConfigField "String", "URL_DOWNLOAD_APK", "\"https://fms.exco.co.kr/apk/\""
             buildConfigField "String", "APP_FLAVOR", "\"exco\""
         }
     }
