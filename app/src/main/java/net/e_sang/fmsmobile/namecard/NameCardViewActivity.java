@@ -3,8 +3,7 @@ package net.e_sang.fmsmobile.namecard;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-import static com.gun0912.tedpermission.provider.TedPermissionProvider.context;
-
+import android.Manifest;
 import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -54,6 +53,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.normal.TedPermission;
 
 import net.e_sang.fmsmobile.BuildConfig;
 import net.e_sang.fmsmobile.R;
@@ -239,14 +240,28 @@ public class NameCardViewActivity extends BaseActivity implements View.OnClickLi
                 startActivity(intent);
             }
         } else if (id == R.id.btn_add_contacts) {
-            if (!Kit.isContactExists(this, nameCardList.name, nameCardList.mobile)) {
-                nameCardImageDown(nameCardList);
-                //saveContact(nameCardList);
-            } else {
-                Toast.makeText(this, "이미 연락처에 등록된 명함입니다.", Toast.LENGTH_SHORT).show();
+            TedPermission.create()
+                    .setPermissionListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted() {
+                            if (!Kit.isContactExists(NameCardViewActivity.this, nameCardList.name, nameCardList.mobile)) {
+                                nameCardImageDown(nameCardList);
+                                //saveContact(nameCardList);
+                            } else {
+                                Toast.makeText(NameCardViewActivity.this, "이미 연락처에 등록된 명함입니다.", Toast.LENGTH_SHORT).show();
 //                btn_add_contacts.setText("내 휴대폰에 저장 완료");
 //                btn_add_contacts.setEnabled(false);
-            }
+                            }
+                        }
+
+                        @Override
+                        public void onPermissionDenied(List<String> deniedPermissions) {
+                            Toast.makeText(NameCardViewActivity.this, "연락처 권한을 허용해야 명함을 저장할 수 있습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setDeniedMessage("연락처 권한을 허용해야 명함을 저장할 수 있습니다. [설정] > [권한]에서 허용해 주세요.")
+                    .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS)
+                    .check();
         }
     }
 
@@ -693,9 +708,9 @@ public class NameCardViewActivity extends BaseActivity implements View.OnClickLi
 
         try {
             getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
-            Toast.makeText(context, "명함 연락처 저장 완료", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "명함 연락처 저장 완료", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(context, "명함 연락처 저장 실패", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "명함 연락처 저장 실패", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
