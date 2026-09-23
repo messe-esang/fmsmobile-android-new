@@ -6,6 +6,7 @@ import static android.view.View.VISIBLE;
 
 import static com.gun0912.tedpermission.provider.TedPermissionProvider.context;
 
+import android.Manifest;
 import android.accounts.Account;
 import android.app.Dialog;
 import android.content.ContentProviderOperation;
@@ -54,6 +55,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.normal.TedPermission;
 
 import net.e_sang.fmsmobile.BuildConfig;
 import net.e_sang.fmsmobile.R;
@@ -75,6 +78,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -588,12 +592,23 @@ public class NameCardEditActivity extends BaseActivity implements View.OnClickLi
             if (edt_name.getText().toString().isEmpty() || edt_phone.getText().toString().isEmpty()) {
                 Toast.makeText(this, "이름 또는 전화번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
             } else if (!Kit.isContactExists(this, edt_name.getText().toString(), edt_phone.getText().toString())) {
-                addContact(nameCardList);
-                //saveContact(nameCardList);
+                TedPermission.create()
+                        .setPermissionListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted() {
+                                addContact(nameCardList);
+                            }
+
+                            @Override
+                            public void onPermissionDenied(List<String> deniedPermissions) {
+                                Toast.makeText(NameCardEditActivity.this, "연락처 권한을 허용해야 명함을 저장할 수 있습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setDeniedMessage("연락처 권한을 허용해야 명함을 저장할 수 있습니다. [설정] > [권한]에서 허용해 주세요.")
+                        .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS)
+                        .check();
             } else {
                 Toast.makeText(this, "이미 연락처에 등록된 명함입니다.", Toast.LENGTH_SHORT).show();
-//                btn_add_contacts.setText("내 휴대폰에 저장 완료");
-//                btn_add_contacts.setEnabled(false);
             }
         }
     }
