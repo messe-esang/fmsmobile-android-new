@@ -6,14 +6,19 @@ import static android.view.View.VISIBLE;
 
 import static com.gun0912.tedpermission.provider.TedPermissionProvider.context;
 
+import android.accounts.Account;
 import android.app.Dialog;
 import android.content.ContentProviderOperation;
+import android.content.ContentProviderResult;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
@@ -767,102 +772,408 @@ public class NameCardEditActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void addContact(NameCardList nameCardList) {
-        ArrayList<ContentProviderOperation> ops = new ArrayList<>();
 
-        //int rawContactID = ops.size();
+        ArrayList<ContentProviderOperation> ops =
+                new ArrayList<>();
+
+        // =========================================================
+        // 기본값 검증
+        // =========================================================
+        if (nameCardList == null) {
+            Toast.makeText(
+                    this,
+                    "연락처 정보가 없습니다.",
+                    Toast.LENGTH_SHORT
+            ).show();
+            return;
+        }
+
+        // =========================================================
+        // RawContact INSERT
+        //
+        // 중요:
+        // RawContact INSERT는 반드시 한 번만 한다.
+        //
+        // 기존 코드에서는 rawContactBuilder.build()를
+        // 두 번 ops에 추가하고 있어서
+        //
+        //   136 = 박경하
+        //   137 = 이름 없음
+        //
+        // 형태의 RawContact가 2개 생성되고 있었다.
+        // =========================================================
+
         int rawContactID = 0;
+
+        ContentValues rawContactValues = new ContentValues();
+
+        // ---------------------------------------------------------
+        // Android 16 (API 36) 이상
+        // ---------------------------------------------------------
+        if (Build.VERSION.SDK_INT >= 36) {
+
+            try {
+
+                ContactsContract.RawContacts.DefaultAccount
+                        .DefaultAccountAndState state =
+                        ContactsContract.RawContacts.DefaultAccount
+                                .getDefaultAccountForNewContacts(
+                                        getContentResolver()
+                                );
+
+                Account account = state.getAccount();
+
+                Log.d(
+                        "CONTACT",
+                        "default account state = "
+                                + state.getState()
+                );
+
+                if (account != null) {
+
+                    Log.d(
+                            "CONTACT",
+                            "account.name = "
+                                    + account.name
+                    );
+
+                    Log.d(
+                            "CONTACT",
+                            "account.type = "
+                                    + account.type
+                    );
+
+                    /*
+                     * Samsung Device 계정:
+                     *
+                     * account.name
+                     *     = vnd.sec.contact.phone
+                     *
+                     * account.type
+                     *     = vnd.sec.contact.phone
+                     *
+                     * Google 계정이라면 일반적으로
+                     * account.name = 이메일
+                     * account.type = com.google
+                     */
+                    rawContactValues.put(
+                            ContactsContract.RawContacts.ACCOUNT_NAME,
+                            account.name
+                    );
+
+                    rawContactValues.put(
+                            ContactsContract.RawContacts.ACCOUNT_TYPE,
+                            account.type
+                    );
+                }
+
+            } catch (Exception e) {
+
+                Log.e(
+                        "CONTACT",
+                        "Android 16 기본 계정 조회 실패",
+                        e
+                );
+            }
+
+            // ---------------------------------------------------------
+            // Android 13 ~ 15
+            // ---------------------------------------------------------
+        } else if (Build.VERSION.SDK_INT >= 33) {
+
+            try {
+
+                Account account =
+                        ContactsContract.Settings.getDefaultAccount(
+                                getContentResolver()
+                        );
+
+                if (account != null) {
+
+                    Log.d(
+                            "CONTACT",
+                            "default account name = "
+                                    + account.name
+                    );
+
+                    Log.d(
+                            "CONTACT",
+                            "default account type = "
+                                    + account.type
+                    );
+
+                    rawContactValues.put(
+                            ContactsContract.RawContacts.ACCOUNT_NAME,
+                            account.name
+                    );
+
+                    rawContactValues.put(
+                            ContactsContract.RawContacts.ACCOUNT_TYPE,
+                            account.type
+                    );
+                }
+
+            } catch (Exception e) {
+
+                Log.e(
+                        "CONTACT",
+                        "Android 13~15 기본 계정 조회 실패",
+                        e
+                );
+            }
+
+            // ---------------------------------------------------------
+            // Android 12 이하
+            // ---------------------------------------------------------
+        } else {
+
+            /*
+             * ACCOUNT_NAME / ACCOUNT_TYPE을 명시하지 않는다.
+             *
+             * 특히 아래처럼 null을 직접 넣으면 안 된다.
+             *
+             * .withValue(ACCOUNT_NAME, null)
+             * .withValue(ACCOUNT_TYPE, null)
+             *
+             * 빈 ContentValues를 그대로 사용한다.
+             */
+        }
+
+        // =========================================================
         // RawContact 생성
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
-                .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
-                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null)
-//                .withValue(ContactsContract.RawContacts.AGGREGATION_MODE,
-//                        ContactsContract.RawContacts.AGGREGATION_MODE_DISABLED)
-                .build());
+        //
+        // ★★★ 반드시 여기서 딱 한 번만 ops.add() ★★★
+        // =========================================================
 
+        ContentProviderOperation.Builder rawContactBuilder =
+                ContentProviderOperation.newInsert(
+                                ContactsContract.RawContacts.CONTENT_URI
+                        )
+                        .withValues(rawContactValues);
+
+        ops.add(rawContactBuilder.build());
+
+        // =========================================================
         // 이름
-        if (!edt_name.getText().toString().isEmpty()) {
-            ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactID)
-                    .withValue(ContactsContract.Data.MIMETYPE,
-                            ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
-                    .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, edt_name.getText().toString())
-                    .build());
+        // =========================================================
+
+        if (edt_name.getText() != null &&
+                !edt_name.getText().toString().trim().isEmpty()) {
+
+            String name = edt_name.getText().toString();
+
+            ops.add(
+                    ContentProviderOperation.newInsert(
+                                    ContactsContract.Data.CONTENT_URI
+                            )
+                            .withValueBackReference(
+                                    ContactsContract.Data.RAW_CONTACT_ID,
+                                    rawContactID
+                            )
+                            .withValue(
+                                    ContactsContract.Data.MIMETYPE,
+                                    ContactsContract.CommonDataKinds
+                                            .StructuredName
+                                            .CONTENT_ITEM_TYPE
+                            )
+                            .withValue(
+                                    ContactsContract.CommonDataKinds
+                                            .StructuredName
+                                            .DISPLAY_NAME,
+                                    name
+                            )
+                            .build()
+            );
         }
+
+        // =========================================================
         // 휴대폰
-        if (!edt_phone.getText().toString().isEmpty()) {
-            addPhone(ops, rawContactID, edt_phone.getText().toString(),
-                    ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE);
-        }
-        // 회사전화
-        if (!edt_tel.getText().toString().isEmpty()) {
-            addPhone(ops, rawContactID, edt_tel.getText().toString(),
-                    ContactsContract.CommonDataKinds.Phone.TYPE_WORK);
-        }
-        // 팩스
-//        if (!nameCardList.fax.isEmpty()) {
-//            addPhone(ops, rawContactID, nameCardList.fax,
-//                    ContactsContract.CommonDataKinds.Phone.TYPE_FAX_WORK);
-//        }
+        // =========================================================
 
+        if (edt_phone.getText() != null &&
+                !edt_phone.getText().toString().trim().isEmpty()) {
+
+            addPhone(
+                    ops,
+                    rawContactID,
+                    edt_phone.getText().toString().trim(),
+                    ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE
+            );
+        }
+
+        // =========================================================
+        // 회사전화
+        // =========================================================
+
+        if (edt_tel.getText() != null &&
+                !edt_tel.getText().toString().trim().isEmpty()) {
+
+            addPhone(
+                    ops,
+                    rawContactID,
+                    edt_tel.getText().toString().trim(),
+                    ContactsContract.CommonDataKinds.Phone.TYPE_WORK
+            );
+        }
+
+        // =========================================================
         // 이메일
-        if (!edt_email.getText().toString().isEmpty()) {
-            ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactID)
-                    .withValue(ContactsContract.Data.MIMETYPE,
-                            ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
-                    .withValue(ContactsContract.CommonDataKinds.Email.DATA, edt_email.getText().toString())
-                    .withValue(ContactsContract.CommonDataKinds.Email.TYPE,
-                            ContactsContract.CommonDataKinds.Email.TYPE_WORK)
+        // =========================================================
+
+        if (edt_email.getText() != null &&
+                !edt_email.getText().toString().trim().isEmpty()) {
+
+            ops.add(
+                    ContentProviderOperation.newInsert(
+                                    ContactsContract.Data.CONTENT_URI
+                            )
+                            .withValueBackReference(
+                                    ContactsContract.Data.RAW_CONTACT_ID,
+                                    rawContactID
+                            )
+                            .withValue(
+                                    ContactsContract.Data.MIMETYPE,
+                                    ContactsContract.CommonDataKinds
+                                            .Email.CONTENT_ITEM_TYPE
+                            )
+                            .withValue(
+                                    ContactsContract.CommonDataKinds.Email.DATA,
+                                    edt_email.getText().toString().trim()
+                            )
+                            .withValue(
+                                    ContactsContract.CommonDataKinds.Email.TYPE,
+                                    ContactsContract.CommonDataKinds
+                                            .Email.TYPE_WORK
+                            )
+                            .build()
+            );
+        }
+
+        // 주소
+        if (!TextUtils.isEmpty(nameCardList.address)) {
+            ops.add(ContentProviderOperation.newInsert(
+                            ContactsContract.Data.CONTENT_URI)
+                    .withValueBackReference(
+                            ContactsContract.Data.RAW_CONTACT_ID, 0)
+                    .withValue(
+                            ContactsContract.Data.MIMETYPE,
+                            ContactsContract.CommonDataKinds.StructuredPostal
+                                    .CONTENT_ITEM_TYPE)
+                    .withValue(
+                            ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS,
+                            nameCardList.address)
+                    .withValue(
+                            ContactsContract.CommonDataKinds.StructuredPostal.TYPE,
+                            ContactsContract.CommonDataKinds.StructuredPostal.TYPE_WORK)
                     .build());
         }
 
+        // 홈페이지
+        if (!TextUtils.isEmpty(nameCardList.homepage)) {
+            ops.add(ContentProviderOperation.newInsert(
+                            ContactsContract.Data.CONTENT_URI)
+                    .withValueBackReference(
+                            ContactsContract.Data.RAW_CONTACT_ID, 0)
+                    .withValue(
+                            ContactsContract.Data.MIMETYPE,
+                            ContactsContract.CommonDataKinds.Website
+                                    .CONTENT_ITEM_TYPE)
+                    .withValue(
+                            ContactsContract.CommonDataKinds.Website.URL,
+                            nameCardList.homepage)
+                    .build());
+        }
+
+        //팩스
+        if (!TextUtils.isEmpty(nameCardList.fax)) {
+            ops.add(ContentProviderOperation.newInsert(
+                            ContactsContract.Data.CONTENT_URI)
+                    .withValueBackReference(
+                            ContactsContract.Data.RAW_CONTACT_ID, 0)
+                    .withValue(
+                            ContactsContract.Data.MIMETYPE,
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+                    .withValue(
+                            ContactsContract.CommonDataKinds.Phone.NUMBER,
+                            nameCardList.fax)
+                    .withValue(
+                            ContactsContract.CommonDataKinds.Phone.TYPE,
+                            ContactsContract.CommonDataKinds.Phone.TYPE_FAX_WORK)
+                    .build());
+        }
+
+        // =========================================================
         // 회사 / 직급 / 부서
+        // =========================================================
+
         String company = edt_company.getText().toString();
         String title = edt_position.getText().toString();
         String department = edt_department.getText().toString();
 
-        ContentProviderOperation.Builder orgBuilder =
-                ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                        .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactID)
-                        .withValue(ContactsContract.Data.MIMETYPE,
-                                ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE);
+        boolean hasOrganization =
+                (company != null &&
+                        !company.trim().isEmpty())
+                        ||
+                        (title != null &&
+                                !title.trim().isEmpty())
+                        ||
+                        (department != null &&
+                                !department.trim().isEmpty());
 
-        if (!company.isEmpty())
-            orgBuilder.withValue(ContactsContract.CommonDataKinds.Organization.COMPANY, company);
+        if (hasOrganization) {
 
-        if (!title.isEmpty())
-            orgBuilder.withValue(ContactsContract.CommonDataKinds.Organization.TITLE, title);
+            ContentProviderOperation.Builder orgBuilder =
+                    ContentProviderOperation.newInsert(
+                                    ContactsContract.Data.CONTENT_URI
+                            )
+                            .withValueBackReference(
+                                    ContactsContract.Data.RAW_CONTACT_ID,
+                                    rawContactID
+                            )
+                            .withValue(
+                                    ContactsContract.Data.MIMETYPE,
+                                    ContactsContract.CommonDataKinds
+                                            .Organization
+                                            .CONTENT_ITEM_TYPE
+                            );
 
-        if (!department.isEmpty())
-            orgBuilder.withValue(ContactsContract.CommonDataKinds.Organization.DEPARTMENT, department);
+            if (company != null &&
+                    !company.trim().isEmpty()) {
 
-        ops.add(orgBuilder.build());
+                orgBuilder.withValue(
+                        ContactsContract.CommonDataKinds
+                                .Organization.COMPANY,
+                        company.trim()
+                );
+            }
 
-        // 주소
-//        if (nameCardList.address != null && !nameCardList.address.isEmpty()) {
-//            ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-//                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactID)
-//                    .withValue(ContactsContract.Data.MIMETYPE,
-//                            ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-//                    .withValue(ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS, nameCardList.address)
-//                    .withValue(ContactsContract.CommonDataKinds.StructuredPostal.TYPE,
-//                            ContactsContract.CommonDataKinds.StructuredPostal.TYPE_WORK)
-//                    .build());
-//        }
-//
-//        // 웹사이트
-//        if (nameCardList.homepage != null && !nameCardList.homepage.isEmpty()) {
-//            ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-//                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactID)
-//                    .withValue(ContactsContract.Data.MIMETYPE,
-//                            ContactsContract.CommonDataKinds.Website.CONTENT_ITEM_TYPE)
-//                    .withValue(ContactsContract.CommonDataKinds.Website.URL, nameCardList.homepage)
-//                    .withValue(ContactsContract.CommonDataKinds.Website.TYPE,
-//                            ContactsContract.CommonDataKinds.Website.TYPE_WORK)
-//                    .build());
-//        }
+            if (title != null &&
+                    !title.trim().isEmpty()) {
 
+                orgBuilder.withValue(
+                        ContactsContract.CommonDataKinds
+                                .Organization.TITLE,
+                        title.trim()
+                );
+            }
+
+            if (department != null &&
+                    !department.trim().isEmpty()) {
+
+                orgBuilder.withValue(
+                        ContactsContract.CommonDataKinds
+                                .Organization.DEPARTMENT,
+                        department.trim()
+                );
+            }
+
+            ops.add(orgBuilder.build());
+        }
+
+        // =========================================================
         // 명함 이미지
+        // =========================================================
+
         if (imageUri != null) {
             Bitmap bitmap = getBitmapFromUri(this, imageUri);
             if (bitmap != null) {
@@ -872,38 +1183,124 @@ public class NameCardEditActivity extends BaseActivity implements View.OnClickLi
                 resized.compress(Bitmap.CompressFormat.JPEG, 80, stream);
                 byte[] imageBytes = stream.toByteArray();
 
-                ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                        .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactID)
-                        .withValue(ContactsContract.Data.MIMETYPE,
-                                ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
-                        .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, imageBytes)
-                        .build());
+                ops.add(
+                        ContentProviderOperation.newInsert(
+                                        ContactsContract.Data.CONTENT_URI
+                                )
+                                .withValueBackReference(
+                                        ContactsContract.Data.RAW_CONTACT_ID,
+                                        rawContactID
+                                )
+                                .withValue(
+                                        ContactsContract.Data.MIMETYPE,
+                                        ContactsContract.CommonDataKinds
+                                                .Photo.CONTENT_ITEM_TYPE
+                                )
+                                .withValue(
+                                        ContactsContract.CommonDataKinds.Photo.PHOTO,
+                                        imageBytes
+                                )
+                                .build()
+                );
             }
         }
 
+        // =========================================================
+        // 실제 저장
+        // =========================================================
+
         try {
-            getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
-            Toast.makeText(context, "내 휴대폰에 저장 완료", Toast.LENGTH_SHORT).show();
+
+            Log.d(
+                    "CONTACT",
+                    "applyBatch operation count = "
+                            + ops.size()
+            );
+
+            ContentProviderResult[] results =
+                    getContentResolver().applyBatch(
+                            ContactsContract.AUTHORITY,
+                            ops
+                    );
+
+            // -----------------------------------------------------
+            // 생성된 RawContact 확인
+            // -----------------------------------------------------
+
+            if (results != null &&
+                    results.length > 0 &&
+                    results[0].uri != null) {
+
+                Uri rawContactUri = results[0].uri;
+
+                Log.d(
+                        "CONTACT",
+                        "RawContact URI = "
+                                + rawContactUri
+                );
+
+                long rawContactId =
+                        ContentUris.parseId(rawContactUri);
+
+                Log.d(
+                        "CONTACT",
+                        "RawContact ID = "
+                                + rawContactId
+                );
+            }
+
+            Toast.makeText(
+                    this,
+                    "명함 연락처 저장 완료",
+                    Toast.LENGTH_SHORT
+            ).show();
+
         } catch (Exception e) {
-            Toast.makeText(context, "내 휴대폰에 저장 실패", Toast.LENGTH_SHORT).show();
+
+            Log.e(
+                    "CONTACT",
+                    "명함 연락처 저장 실패",
+                    e
+            );
+
             e.printStackTrace();
+
+            Toast.makeText(
+                    this,
+                    "명함 연락처 저장 실패\n" +
+                            e.getMessage(),
+                    Toast.LENGTH_SHORT
+            ).show();
         }
     }
 
-    private void addPhone(ArrayList<ContentProviderOperation> ops,
-                          int rawContactID,
-                          String number,
-                          int type) {
+    private void addPhone(
+            ArrayList<ContentProviderOperation> ops,
+            int rawContactID,
+            String phone,
+            int type) {
 
-        if (number == null || number.isEmpty()) return;
+        if (phone == null || phone.trim().isEmpty()) {
+            return;
+        }
 
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactID)
-                .withValue(ContactsContract.Data.MIMETYPE,
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, number)
-                .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, type)
-                .build());
+        ops.add(
+                ContentProviderOperation.newInsert(
+                                ContactsContract.Data.CONTENT_URI)
+                        .withValueBackReference(
+                                ContactsContract.Data.RAW_CONTACT_ID,
+                                rawContactID)
+                        .withValue(
+                                ContactsContract.Data.MIMETYPE,
+                                ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+                        .withValue(
+                                ContactsContract.CommonDataKinds.Phone.NUMBER,
+                                phone)
+                        .withValue(
+                                ContactsContract.CommonDataKinds.Phone.TYPE,
+                                type)
+                        .build()
+        );
     }
 
     private Bitmap getBitmapFromUri(Context context, Uri uri) {
