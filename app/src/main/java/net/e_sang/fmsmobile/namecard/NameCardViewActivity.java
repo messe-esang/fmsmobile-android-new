@@ -895,57 +895,57 @@ public class NameCardViewActivity extends BaseActivity implements View.OnClickLi
         }
 
         // 주소
-        if (!TextUtils.isEmpty(nameCardList.address)) {
-            ops.add(ContentProviderOperation.newInsert(
-                            ContactsContract.Data.CONTENT_URI)
-                    .withValueBackReference(
-                            ContactsContract.Data.RAW_CONTACT_ID, 0)
-                    .withValue(
-                            ContactsContract.Data.MIMETYPE,
-                            ContactsContract.CommonDataKinds.StructuredPostal
-                                    .CONTENT_ITEM_TYPE)
-                    .withValue(
-                            ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS,
-                            nameCardList.address)
-                    .withValue(
-                            ContactsContract.CommonDataKinds.StructuredPostal.TYPE,
-                            ContactsContract.CommonDataKinds.StructuredPostal.TYPE_WORK)
-                    .build());
-        }
-
-        // 홈페이지
-        if (!TextUtils.isEmpty(nameCardList.homepage)) {
-            ops.add(ContentProviderOperation.newInsert(
-                            ContactsContract.Data.CONTENT_URI)
-                    .withValueBackReference(
-                            ContactsContract.Data.RAW_CONTACT_ID, 0)
-                    .withValue(
-                            ContactsContract.Data.MIMETYPE,
-                            ContactsContract.CommonDataKinds.Website
-                                    .CONTENT_ITEM_TYPE)
-                    .withValue(
-                            ContactsContract.CommonDataKinds.Website.URL,
-                            nameCardList.homepage)
-                    .build());
-        }
-
-        //팩스
-        if (!TextUtils.isEmpty(nameCardList.fax)) {
-            ops.add(ContentProviderOperation.newInsert(
-                            ContactsContract.Data.CONTENT_URI)
-                    .withValueBackReference(
-                            ContactsContract.Data.RAW_CONTACT_ID, 0)
-                    .withValue(
-                            ContactsContract.Data.MIMETYPE,
-                            ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
-                    .withValue(
-                            ContactsContract.CommonDataKinds.Phone.NUMBER,
-                            nameCardList.fax)
-                    .withValue(
-                            ContactsContract.CommonDataKinds.Phone.TYPE,
-                            ContactsContract.CommonDataKinds.Phone.TYPE_FAX_WORK)
-                    .build());
-        }
+//        if (!TextUtils.isEmpty(nameCardList.address)) {
+//            ops.add(ContentProviderOperation.newInsert(
+//                            ContactsContract.Data.CONTENT_URI)
+//                    .withValueBackReference(
+//                            ContactsContract.Data.RAW_CONTACT_ID, 0)
+//                    .withValue(
+//                            ContactsContract.Data.MIMETYPE,
+//                            ContactsContract.CommonDataKinds.StructuredPostal
+//                                    .CONTENT_ITEM_TYPE)
+//                    .withValue(
+//                            ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS,
+//                            nameCardList.address)
+//                    .withValue(
+//                            ContactsContract.CommonDataKinds.StructuredPostal.TYPE,
+//                            ContactsContract.CommonDataKinds.StructuredPostal.TYPE_WORK)
+//                    .build());
+//        }
+//
+//        // 홈페이지
+//        if (!TextUtils.isEmpty(nameCardList.homepage)) {
+//            ops.add(ContentProviderOperation.newInsert(
+//                            ContactsContract.Data.CONTENT_URI)
+//                    .withValueBackReference(
+//                            ContactsContract.Data.RAW_CONTACT_ID, 0)
+//                    .withValue(
+//                            ContactsContract.Data.MIMETYPE,
+//                            ContactsContract.CommonDataKinds.Website
+//                                    .CONTENT_ITEM_TYPE)
+//                    .withValue(
+//                            ContactsContract.CommonDataKinds.Website.URL,
+//                            nameCardList.homepage)
+//                    .build());
+//        }
+//
+//        //팩스
+//        if (!TextUtils.isEmpty(nameCardList.fax)) {
+//            ops.add(ContentProviderOperation.newInsert(
+//                            ContactsContract.Data.CONTENT_URI)
+//                    .withValueBackReference(
+//                            ContactsContract.Data.RAW_CONTACT_ID, 0)
+//                    .withValue(
+//                            ContactsContract.Data.MIMETYPE,
+//                            ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+//                    .withValue(
+//                            ContactsContract.CommonDataKinds.Phone.NUMBER,
+//                            nameCardList.fax)
+//                    .withValue(
+//                            ContactsContract.CommonDataKinds.Phone.TYPE,
+//                            ContactsContract.CommonDataKinds.Phone.TYPE_FAX_WORK)
+//                    .build());
+//        }
 
         // =========================================================
         // 회사 / 직급 / 부서
